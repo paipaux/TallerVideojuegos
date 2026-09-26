@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://blbbvdfbj2gug"]
+
+[ext_resource type="Script" uid="uid://df4clwwpv44gr" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="PackedScene" uid="uid://cns74580fhcb3" path="res://sword.tscn" id="2_onrkg"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1s8gj"]
+radius = 0.1
+height = 0.4
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m8r1m"]
+radius = 0.1
+height = 0.4
+
+[node name="CharacterBody3D" type="CharacterBody3D" unique_id=100382861]
+script = ExtResource("1_4flbx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1158652440]
+mesh = SubResource("CapsuleMesh_1s8gj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=635650430]
+shape = SubResource("CapsuleShape3D_m8r1m")
+
+[node name="sword" parent="." unique_id=89759322 instance=ExtResource("2_onrkg")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.26826, 0.2221452, 0)
