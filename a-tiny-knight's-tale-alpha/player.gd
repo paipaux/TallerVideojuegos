@@ -4,13 +4,18 @@ extends CharacterBody3D
 @export var jump_velocity: float = 4.5
 @export var reach_distance: float = 4.0 # distancia para clavar o recoger la espada
 
+@export var tilt_intensity: float = 0.08
+@export var tilt_recovery: float = 9
+@export var trajectory_tilt: float = 0.6
+
 var has_sword: bool = true
 var active_sword_instance: Node3D = null
 
 var is_moving: bool = false
-
+var sword_sway: Vector2 = Vector2.ZERO
 
 @onready var sword: Node3D = $sword
+@onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
 
 const swoooord = preload("res://sword_platform.tscn")
 
@@ -18,7 +23,7 @@ func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _input(event):
-	if event is InputEventMouseMotion:
+	if has_sword and event is InputEventMouseMotion:
 		sword.rotation.y -= event.relative.x * 0.01
 		sword.rotation.x = clamp(
 			# para que no atraviese el sueloooo
@@ -26,6 +31,9 @@ func _input(event):
 			deg_to_rad(-90),
 			deg_to_rad(90)
 		)
+		
+		sword_sway.x += event.relative.x * tilt_intensity * 0.05
+		sword_sway.y += event.relative.y * tilt_intensity * 0.05
 	
 	# clavar y recoger la espadaa
 	if event.is_action_pressed("throw"):
@@ -53,10 +61,32 @@ func _physics_process(delta: float) -> void:
 	var current: Vector2 = Vector2(velocity.x, velocity.z)
 	var result: Vector2 = current.move_toward(target, acceleration * delta)
 
-	velocity.x = result.x
-	velocity.z = result.y
+	var stumble: Vector3 = Vector3.ZERO
+	
+	if has_sword:
+		var sword_ws: Vector3 = -sword.global_transform.basis.z
+		var sword_ad: Vector3 = sword.global_transform.basis.x
+		stumble = ((sword_ad * sword_sway.x) + (sword_ws * -sword_sway.y)) * trajectory_tilt
+	
+	velocity.x = result.x + stumble.x
+	velocity.z = result.y + stumble.z
 
 	move_and_slide()
+	
+	tilt(delta)
+
+
+# se tambalea si mueve la espada
+func tilt(delta: float) -> void:
+	if has_sword:
+		var tilt_z: float = clamp(-sword_sway.x, -0.45, 0.45)
+		var tilt_x: float = clamp(sword_sway.y, -0.45, 0.45)
+	
+		mesh_instance_3d.rotation.z = lerp_angle(mesh_instance_3d.rotation.z, tilt_z, 12.0 * delta)
+		mesh_instance_3d.rotation.x = lerp_angle(mesh_instance_3d.rotation.x, tilt_x, 12.0 * delta)
+	
+		sword_sway = sword_sway.lerp(Vector2.ZERO, tilt_recovery * delta)
+
 
 func throw_sword() -> void:
 	var tip_local := Vector3(0, 1.25, 0)  # se puede ir cambiando el 1.25 por otros para que no quede flotando o rara
