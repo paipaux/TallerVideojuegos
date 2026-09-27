@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dvsrqp7g3txk5"]
+
+[ext_resource type="Script" uid="uid://dwktr6sc5bdjg" path="res://pause_menu.gd" id="1_hdmo1"]
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=1998557336]
+process_mode = 3
+script = ExtResource("1_hdmo1")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=299012689]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -157.0
+offset_top = -145.0
+offset_right = 155.0
+offset_bottom = 143.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1580871497]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1253320022]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=281370452]
+layout_mode = 2
+text = "Juego pausado"
+horizontal_alignment = 1
+
+[node name="Resume" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1636514113]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Volver al juego"
+
+[node name="Retry" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=540142159]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reintentar"
+
+[node name="Back" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=912883753]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Volver al menú"
+
+[node name="Quit" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1398871103]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Salir"
