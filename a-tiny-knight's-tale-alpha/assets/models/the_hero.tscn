@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://boeebhyco7w3t"]
+
+[ext_resource type="PackedScene" uid="uid://ciebako612k45" path="res://assets/models/TheHero.glb" id="1_fe8mg"]
+
+[node name="TheHero" unique_id=1577262880 instance=ExtResource("1_fe8mg")]
+
+[node name="TwoBoneIK3D" type="TwoBoneIK3D" parent="Skeleton3D" parent_id_path=PackedInt32Array(243504938) index="1" unique_id=1193173010]

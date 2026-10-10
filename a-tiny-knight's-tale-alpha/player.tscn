@@ -2,23 +2,133 @@
 
 [ext_resource type="Script" uid="uid://df4clwwpv44gr" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="PackedScene" uid="uid://cns74580fhcb3" path="res://sword.tscn" id="2_onrkg"]
+[ext_resource type="PackedScene" uid="uid://boeebhyco7w3t" path="res://assets/models/the_hero.tscn" id="2_sweqy"]
+[ext_resource type="AnimationLibrary" uid="uid://cac5nvrmp60j" path="res://assets/models/TheHero_animations.glb" id="3_sweqy"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_1s8gj"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m8r1m"]
 radius = 0.1
 height = 0.4
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m8r1m"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hqtel"]
+animation = &"fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sweqy"]
+animation = &"idle "
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2hs0m"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1jxqw"]
+animation = &"walk "
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dw050"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b26j0"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n7ghd"]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nvl01"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ivps1"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_urp6f"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bwjto"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_606se"]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u1c27"]
+xfade_time = 0.35
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_57qmd"]
+states/End/position = Vector2(670, 100)
+states/Start/position = Vector2(100, 77)
+states/fall/node = SubResource("AnimationNodeAnimation_hqtel")
+states/fall/position = Vector2(433.43536, 54)
+"states/idle /node" = SubResource("AnimationNodeAnimation_sweqy")
+"states/idle /position" = Vector2(249.43535, 154)
+states/jump/node = SubResource("AnimationNodeAnimation_2hs0m")
+states/jump/position = Vector2(295.43536, 45)
+"states/walk /node" = SubResource("AnimationNodeAnimation_1jxqw")
+"states/walk /position" = Vector2(443.43536, 154)
+transitions = ["Start", "idle ", SubResource("AnimationNodeStateMachineTransition_dw050"), "idle ", "walk ", SubResource("AnimationNodeStateMachineTransition_b26j0"), "walk ", "idle ", SubResource("AnimationNodeStateMachineTransition_n7ghd"), "idle ", "jump", SubResource("AnimationNodeStateMachineTransition_nvl01"), "walk ", "jump", SubResource("AnimationNodeStateMachineTransition_ivps1"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_urp6f"), "walk ", "fall", SubResource("AnimationNodeStateMachineTransition_bwjto"), "fall", "idle ", SubResource("AnimationNodeStateMachineTransition_606se"), "fall", "walk ", SubResource("AnimationNodeStateMachineTransition_u1c27")]
+graph_offset = Vector2(43.43535, 0)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1s8gj"]
 radius = 0.1
 height = 0.4
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=100382861]
 script = ExtResource("1_4flbx")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1158652440]
-mesh = SubResource("CapsuleMesh_1s8gj")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=635650430]
 shape = SubResource("CapsuleShape3D_m8r1m")
 
+[node name="Model" type="Node3D" parent="." unique_id=529573730]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019052744, 0, -0.16047612)
+
+[node name="TheHero" parent="Model" unique_id=1577262880 instance=ExtResource("2_sweqy")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.016688973, -0.041174024, 0.1867649)
+
+[node name="TwoBoneIK3D" parent="Model/TheHero/Skeleton3D" parent_id_path=PackedInt32Array(1577262880, 243504938) index="1" unique_id=1193173010]
+setting_count = 2
+settings/0/target_node = NodePath("../../../../sword/Marker3D_R")
+settings/0/pole_node = NodePath("../../../PoleNodeR")
+settings/0/root_bone_name = "arm_r"
+settings/0/root_bone = 10
+settings/0/middle_bone_name = "forearm_r"
+settings/0/middle_bone = 11
+settings/0/pole_direction = 0
+settings/0/end_bone_name = "hand_r"
+settings/0/end_bone = 12
+settings/0/use_virtual_end = false
+settings/0/extend_end_bone = false
+settings/1/target_node = NodePath("../../../../sword/Marker3D_L")
+settings/1/pole_node = NodePath("../../../PoleNodeL")
+settings/1/root_bone_name = "arm_l"
+settings/1/root_bone = 6
+settings/1/middle_bone_name = "forearm_l"
+settings/1/middle_bone = 7
+settings/1/pole_direction = 0
+settings/1/end_bone_name = "hand_l"
+settings/1/end_bone = 8
+settings/1/use_virtual_end = false
+settings/1/extend_end_bone = false
+
+[node name="PoleNodeL" type="Marker3D" parent="Model" unique_id=602365977]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.49025962, 0.037444055, 0.15818585)
+
+[node name="PoleNodeR" type="Marker3D" parent="Model" unique_id=1482631099]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.40540606, 0.073020935, 0.15518604)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Model" unique_id=258487088]
+root_node = NodePath("../TheHero")
+libraries/ = ExtResource("3_sweqy")
+
+[node name="AnimationTree" type="AnimationTree" parent="Model" unique_id=1002968614]
+root_node = NodePath("../TheHero")
+tree_root = SubResource("AnimationNodeStateMachine_57qmd")
+anim_player = NodePath("../AnimationPlayer")
+
 [node name="sword" parent="." unique_id=89759322 instance=ExtResource("2_onrkg")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.26826, 0.2221452, 0)
+transform = Transform3D(-0.5, 0, -4.3711385e-08, 0, 0.5, 0, 4.3711385e-08, 0, -0.5, -0.017645717, 0.39282846, -0.25399178)
+
+[node name="Marker3D_R" type="Marker3D" parent="sword" unique_id=369319593]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.07666132, -0.65401757, -0.0098391175)
+
+[node name="Marker3D_L" type="Marker3D" parent="sword" unique_id=1717012526]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.10102704, -0.49546903, 0.01442492)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1158652440]
+visible = false
+mesh = SubResource("CapsuleMesh_1s8gj")
+
+[editable path="Model/TheHero"]

@@ -15,13 +15,13 @@ var is_moving: bool = false
 var sword_sway: Vector2 = Vector2.ZERO
 
 @onready var sword: Node3D = $sword
-@onready var mesh_instance_3d: MeshInstance3D = $MeshInstance3D
+@onready var model: Node3D = $Model
 
 const swoooord = preload("res://sword_platform.tscn")
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
+	
 func _input(event):
 	if has_sword and event is InputEventMouseMotion:
 		sword.rotation.y -= event.relative.x * 0.01
@@ -82,8 +82,8 @@ func tilt(delta: float) -> void:
 		var tilt_z: float = clamp(-sword_sway.x, -0.45, 0.45)
 		var tilt_x: float = clamp(sword_sway.y, -0.45, 0.45)
 	
-		mesh_instance_3d.rotation.z = lerp_angle(mesh_instance_3d.rotation.z, tilt_z, 12.0 * delta)
-		mesh_instance_3d.rotation.x = lerp_angle(mesh_instance_3d.rotation.x, tilt_x, 12.0 * delta)
+		model.rotation.z = lerp_angle(model.rotation.z, tilt_z, 12.0 * delta)
+		model.rotation.x = lerp_angle(model.rotation.x, tilt_x, 12.0 * delta)
 	
 		sword_sway = sword_sway.lerp(Vector2.ZERO, tilt_recovery * delta)
 

@@ -1,10 +1,15 @@
 [gd_scene format=3 uid="uid://cns74580fhcb3"]
 
+[ext_resource type="PackedScene" uid="uid://vtshhx2d4jil" path="res://assets/models/BigSword.glb" id="1_74bdg"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_m8r1m"]
 size = Vector3(0.5, 3, 0.5)
 
 [node name="Node3D" type="Node3D" unique_id=1482983665]
 
+[node name="BigSword" parent="." unique_id=1971305203 instance=ExtResource("1_74bdg")]
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1405743878]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+visible = false
 mesh = SubResource("BoxMesh_m8r1m")
