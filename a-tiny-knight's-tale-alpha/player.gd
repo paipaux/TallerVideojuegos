@@ -13,6 +13,9 @@ extends CharacterBody3D
 @export var pivot_gravity: float = 0.6 # gravedad se reduce al pivotear
 @export var pivot_push: float = 8.0 # cuanto se puede empujar en el pivote
 
+#Velocidad con la que el modelo rota, esta rotación es para donde mira el personaje al caminar
+@export var turn_speed: float = 6.0
+
 var has_sword: bool = true
 var active_sword_instance: Node3D = null
 
@@ -25,13 +28,25 @@ var pivot_length: float = 0.0
 var pivot_time: float = 0.0
 var pivot_sword: Transform3D
 
+#Modelos 
 @onready var sword: Node3D = $sword
 @onready var model: Node3D = $Model
+
+#Componentes de animacion, junto a playback, un parametro de AnimationTree para cambiar de estados
+#en la maquina de estados
+@onready var animation_player: AnimationPlayer = $Model/AnimationPlayer
+@onready var animation_tree: AnimationTree = $Model/AnimationTree
+@onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
+
+#Estados de la maquina de estados 
+enum State { IDLE, WALK, JUMP, FALL }
+var state: State = State.IDLE
 
 const swoooord = preload("res://sword_platform.tscn")
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	animation_tree.active = true
 	
 func _input(event):
 	if has_sword and not is_pivot and event is InputEventMouseMotion:
@@ -40,7 +55,7 @@ func _input(event):
 			# para que no atraviese el sueloooo
 			sword.rotation.x - event.relative.y * 0.01,
 			deg_to_rad(-150),
-			deg_to_rad(90)
+			deg_to_rad(150)
 		)
 		
 		sword_sway.x += event.relative.x * tilt_intensity * 0.05
@@ -74,6 +89,7 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
+		set_state(State.JUMP)
 
 	var move_input: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
@@ -83,7 +99,11 @@ func _physics_process(delta: float) -> void:
 	var result: Vector2 = current.move_toward(target, acceleration * delta)
 
 	var stumble: Vector3 = Vector3.ZERO
-
+	if move_input.length() > 0.1:
+		var dir := Vector3(direction.x, 0.0, direction.y)
+		var target_yaw := atan2(-dir.x, -dir.z)  # si tu modelo mira hacia +Z, usa atan2(dir.x, dir.z)
+		model.rotation.y = lerp_angle(model.rotation.y, target_yaw, turn_speed * delta)
+	
 	if has_sword:
 		var sword_ws: Vector3 = -sword.global_transform.basis.z
 		var sword_ad: Vector3 = sword.global_transform.basis.x
@@ -93,9 +113,26 @@ func _physics_process(delta: float) -> void:
 	velocity.z = result.y + stumble.z
 
 	move_and_slide()
-
+	update_animation_state()
 	tilt(delta)
 
+#STATE MACHINE
+#logica detras de las animaciones del personaje
+func set_state(new_state: State) -> void:
+	if new_state == state:
+		return
+	state = new_state
+	playback.travel(State.keys()[state].to_lower())
+
+func update_animation_state() -> void:
+	if not is_on_floor():
+		# jump solo se mantiene si ya estábamos en JUMP, seguimos subiendo y no pivotamos
+		if state == State.JUMP and velocity.y > 0.0 and not is_pivot:
+			return
+		set_state(State.FALL)
+	else:
+		var move_input := Input.get_vector("move_left", "move_right", "move_up", "move_down")
+		set_state(State.WALK if move_input.length() > 0.1 else State.IDLE)
 
 # se tambalea si mueve la espada
 func tilt(delta: float) -> void:
@@ -216,6 +253,7 @@ func pivott(delta: float) -> void:
 	velocity += push * pivot_push * delta
 	velocity -= radial * velocity.dot(radial)
 	move_and_slide()
+	update_animation_state()
 
 	var current_dist: float = global_position.distance_to(pivot_point)
 
