@@ -78,7 +78,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019052744, 0, -0.16047612)
 [node name="TheHero" parent="Model" unique_id=1577262880 instance=ExtResource("2_sweqy")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.016688973, -0.041174024, 0.1867649)
 
-[node name="TwoBoneIK3D" parent="Model/TheHero/Skeleton3D" parent_id_path=PackedInt32Array(1577262880, 243504938) index="1" unique_id=1193173010]
+[node name="Skeleton3D" parent="Model/TheHero" index="0" unique_id=1565924798]
+bones/1/position = Vector3(0, 0.108205765, 0)
+bones/2/position = Vector3(5.808163e-14, 0.09562379, -0.22312674)
+bones/3/rotation = Quaternion(-0.707214, 8.4280394e-08, -8.4307e-08, 0.70699954)
+bones/13/rotation = Quaternion(0.6669287, 0.23463725, -0.23470825, 0.6671308)
+bones/14/rotation = Quaternion(-0.10046055, -0.03534389, 0.32999, 0.937958)
+bones/15/rotation = Quaternion(0.18493696, -2.7557714e-09, -1.4644142e-08, 0.9827504)
+bones/16/rotation = Quaternion(-0.7696546, -1.2539265e-07, 1.0401841e-07, 0.6384605)
+bones/17/rotation = Quaternion(0.6669287, -0.23463725, 0.23470825, 0.6671308)
+bones/18/rotation = Quaternion(-0.10046055, 0.03534389, -0.32999, 0.937958)
+bones/19/rotation = Quaternion(0.18493699, 2.7557712e-09, 1.4644144e-08, 0.9827505)
+bones/20/rotation = Quaternion(-0.7696546, 1.2539265e-07, -1.04018405e-07, 0.6384605)
+
+[node name="TwoBoneIK3D" parent="Model/TheHero/Skeleton3D" index="1" unique_id=1193173010]
 setting_count = 2
 settings/0/target_node = NodePath("../../../../sword/Marker3D_R")
 settings/0/pole_node = NodePath("../../../PoleNodeR")
