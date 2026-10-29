@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://csgv122vqt3uu"]
+
+[ext_resource type="Script" uid="uid://hkk3ntjtv5qt" path="res://components/health_component.gd" id="1_becj5"]
+[ext_resource type="Script" uid="uid://b7psqajbs4uja" path="res://enemigo.gd" id="1_bnx68"]
+[ext_resource type="Script" uid="uid://byef6115jvt8u" path="res://components/hitbox_component.gd" id="2_moxti"]
+[ext_resource type="Script" uid="uid://d2scaqlqkgoel" path="res://components/hurtbox_component.gd" id="3_bnx68"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gnkvg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dib1w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gnkvg"]
+size = Vector3(1.0664063, 1, 1.1279297)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j8qs0"]
+size = Vector3(1.0657959, 0.272583, 1.1279907)
+
+[node name="Enemigo" type="CharacterBody3D" unique_id=1672550888]
+script = ExtResource("1_bnx68")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=745987776]
+mesh = SubResource("BoxMesh_gnkvg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2028497217]
+shape = SubResource("BoxShape3D_dib1w")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=632862375]
+script = ExtResource("1_becj5")
+metadata/_custom_type_script = "uid://hkk3ntjtv5qt"
+
+[node name="HitboxComponent" type="Area3D" parent="." unique_id=1959385991]
+script = ExtResource("2_moxti")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent" unique_id=76625392]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013823986, -0.07818228, 0.008923948)
+shape = SubResource("BoxShape3D_gnkvg")
+
+[node name="HurtboxComponent" type="Area3D" parent="." unique_id=1287155608]
+script = ExtResource("3_bnx68")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent" unique_id=103647950]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015979648, 0.5767532, 0.0093688965)
+shape = SubResource("BoxShape3D_j8qs0")

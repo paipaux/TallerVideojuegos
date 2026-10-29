@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://blbbvdfbj2gug" path="res://player.tscn" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://dvsrqp7g3txk5" path="res://pause_menu.tscn" id="2_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://csgv122vqt3uu" path="res://enemigo.tscn" id="3_tlwt5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -174,3 +175,10 @@ mesh = SubResource("BoxMesh_fj7yv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MiniPlatform2" unique_id=1562851719]
 shape = SubResource("BoxShape3D_tlwt5")
+
+[node name="Enemigo" parent="." unique_id=1672550888 instance=ExtResource("3_tlwt5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.5, 7)
+speed = 2.0
+
+[node name="Enemigo2" parent="." unique_id=1289705993 instance=ExtResource("3_tlwt5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4749756, 0.5, 4.0895967)
