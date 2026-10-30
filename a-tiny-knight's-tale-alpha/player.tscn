@@ -78,20 +78,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019052744, 0, -0.16047612)
 [node name="TheHero" parent="Model" unique_id=1577262880 instance=ExtResource("2_sweqy")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.016688973, -0.041174024, 0.1867649)
 
-[node name="Skeleton3D" parent="Model/TheHero" index="0" unique_id=1109448159]
-bones/1/position = Vector3(0, 0.06327097, 0)
-bones/2/position = Vector3(1.2390745e-13, 0.050688997, -0.22312674)
+[node name="Skeleton3D" parent="Model/TheHero" index="0" unique_id=2092212750]
+bones/1/position = Vector3(0, 0.06432388, 0)
+bones/2/position = Vector3(-2.775366e-14, 0.051741898, -0.22312674)
 bones/3/rotation = Quaternion(-0.707214, 8.42804e-08, -8.4307004e-08, 0.7069996)
 bones/13/rotation = Quaternion(0.6669287, 0.23463723, -0.23470823, 0.6671308)
-bones/14/rotation = Quaternion(-0.2134898, -0.075109564, 0.32326633, 0.9188469)
-bones/15/rotation = Quaternion(0.3900032, -5.8114997e-09, -1.372121e-08, 0.9208135)
-bones/16/rotation = Quaternion(-0.8327295, -1.3566886e-07, 9.020596e-08, 0.5536802)
+bones/14/rotation = Quaternion(-0.21088512, -0.07419319, 0.32347786, 0.91944814)
+bones/15/rotation = Quaternion(0.38544548, 3.5113348e-09, -2.3283192e-08, 0.9227307)
+bones/16/rotation = Quaternion(-0.83136094, -8.415277e-08, 1.4942079e-07, 0.55573285)
 bones/17/rotation = Quaternion(0.6669287, -0.23463723, 0.23470823, 0.6671308)
-bones/18/rotation = Quaternion(-0.2134898, 0.075109564, -0.32326633, 0.9188469)
-bones/19/rotation = Quaternion(0.39000335, 5.8115015e-09, 1.372121e-08, 0.92081344)
-bones/20/rotation = Quaternion(-0.8327295, 1.3566886e-07, -9.020596e-08, 0.5536802)
+bones/18/rotation = Quaternion(-0.21088514, 0.07419319, -0.32347786, 0.91944814)
+bones/19/rotation = Quaternion(0.38544548, -3.5113348e-09, 2.3283189e-08, 0.9227307)
+bones/20/rotation = Quaternion(-0.83136094, 8.415276e-08, -1.494208e-07, 0.55573285)
 
-[node name="Cube" parent="Model/TheHero/Skeleton3D" index="0" unique_id=900544739]
+[node name="Cube" parent="Model/TheHero/Skeleton3D" index="0" unique_id=322708997]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.013046667, 0)
 
 [node name="TwoBoneIK3D" parent="Model/TheHero/Skeleton3D" index="1" unique_id=1193173010]

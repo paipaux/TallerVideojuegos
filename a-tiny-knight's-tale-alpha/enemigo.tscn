@@ -5,7 +5,11 @@
 [ext_resource type="Script" uid="uid://byef6115jvt8u" path="res://components/hitbox_component.gd" id="2_moxti"]
 [ext_resource type="Script" uid="uid://d2scaqlqkgoel" path="res://components/hurtbox_component.gd" id="3_bnx68"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aju8y"]
+albedo_color = Color(1, 0.13333334, 1, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_gnkvg"]
+material = SubResource("StandardMaterial3D_aju8y")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dib1w"]
 

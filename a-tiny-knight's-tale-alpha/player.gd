@@ -4,14 +4,25 @@ extends CharacterBody3D
 @export var jump_velocity: float = 4.5
 @export var reach_distance: float = 4.0 # distancia para clavar o recoger la espada
 
+# Espada con peso, Modificar para buscar buen movimiento
+
+@export var mouse_sensitivity: float = 0.003 # radianes de impulso por pixel de mouse
+@export var mouse_boost_max: float = 1.5    # multiplicador del impulso tras mover el mouse sostenidamente
+@export var sword_accel_ramp: float = 0.5   # segundos moviendo en la misma dirección para llegar al boost máximo
+@export var mouse_idle_grace: float = 0.10  # segundos sin mover el mouse antes de perder el boost
+@export var sword_max_speed: float = 3.0    # velocidad angular máxima 
+@export var sword_damping: float = 0.5      # qué tan rápido se frena al dejar de mover el mouse
+
 @export var tilt_intensity: float = 0.08
 @export var tilt_recovery: float = 9
 @export var trajectory_tilt: float = 0.6
 
+#Varaibles de Pivote
+
 @export var min_pivot_length: float = 1.0 # distancia para pivotear
-@export var boost_inicial: float = 3.0 # fuerza con la que "salta"
+@export var boost_inicial: float = 2.5 # fuerza con la que "salta"
 @export var pivot_gravity: float = 0.6 # gravedad se reduce al pivotear
-@export var pivot_push: float = 8.0 # cuanto se puede empujar en el pivote
+@export var pivot_push: float = 6.0 # cuanto se puede empujar en el pivote
 
 #Velocidad con la que el modelo rota, esta rotación es para donde mira el personaje al caminar
 @export var turn_speed: float = 6.0
@@ -21,9 +32,13 @@ var active_sword_instance: Node3D = null
 
 var is_moving: bool = false
 var sword_sway: Vector2 = Vector2.ZERO
+var sword_vel: Vector2 = Vector2.ZERO  # x = giro horizontal, y = giro vertical
+var aim_hold: Vector2 = Vector2.ZERO   # segundos que llevas moviendo el mouse en cada eje
+var aim_idle: Vector2 = Vector2.ZERO   # segundos sin mover el mouse en cada eje
+var mouse_input: Vector2 = Vector2.ZERO # movimiento acumulado del mouse entre ticks de física
 
 var is_pivot: bool = false
-var pivot_point: Vector3 =Vector3.ZERO
+var pivot_point: Vector3 = Vector3.ZERO
 var pivot_length: float = 0.0
 var pivot_time: float = 0.0
 var pivot_sword: Transform3D
@@ -49,17 +64,9 @@ func _ready():
 	animation_tree.active = true
 	
 func _input(event):
+	# el mouse no mueve la espada directo, solo le da impulso (se consume en update_sword_aim)
 	if has_sword and not is_pivot and event is InputEventMouseMotion:
-		sword.rotation.y -= event.relative.x * 0.01
-		sword.rotation.x = clamp(
-			# para que no atraviese el sueloooo
-			sword.rotation.x - event.relative.y * 0.01,
-			deg_to_rad(-150),
-			deg_to_rad(150)
-		)
-		
-		sword_sway.x += event.relative.x * tilt_intensity * 0.05
-		sword_sway.y += event.relative.y * tilt_intensity * 0.05
+		mouse_input += event.relative
 
 	# clavar y recoger la espadaa
 	if event.is_action_pressed("throw") and not is_pivot:
@@ -76,10 +83,48 @@ func _input(event):
 			start_pivot()
 
 
-func _physics_process(delta: float) -> void:
-	var mouse_pos = get_viewport().get_mouse_position()
-	#print("Mouse pos: ", mouse_pos)
+# Movimiento de la espada con mouse: el mouse da impulso a una velocidad angular con inercia
+func update_sword_aim(delta: float) -> void:
+	if not has_sword:
+		sword_vel = Vector2.ZERO
+		aim_hold = Vector2.ZERO
+		aim_idle = Vector2.ZERO
+		mouse_input = Vector2.ZERO
+		return
 
+	for axis in 2:
+		if absf(mouse_input[axis]) > 0.0:
+			# mientras más tiempo sigas moviendo el mouse, más fuerte es el impulso
+			aim_hold[axis] += delta
+			aim_idle[axis] = 0.0
+			var t: float = clampf(aim_hold[axis] / sword_accel_ramp, 0.0, 1.0)
+			var boost: float = lerpf(1.0, mouse_boost_max, t * t)
+			sword_vel[axis] += mouse_input[axis] * mouse_sensitivity * boost
+		else:
+			# sin movimiento: tras un instante se pierde el boost y la inercia se apaga
+			aim_idle[axis] += delta
+			if aim_idle[axis] > mouse_idle_grace:
+				aim_hold[axis] = 0.0
+			sword_vel[axis] = lerpf(sword_vel[axis], 0.0, sword_damping * delta)
+
+	mouse_input = Vector2.ZERO
+
+	sword_vel = sword_vel.limit_length(sword_max_speed)
+
+	# aplicar la rotación
+	sword.rotation.y -= sword_vel.x * delta
+
+	var new_pitch: float = sword.rotation.x - sword_vel.y * delta
+	var limit: float = deg_to_rad(150)
+	sword.rotation.x = clampf(new_pitch, -limit, limit)
+	if absf(new_pitch) > limit:
+		sword_vel.y = 0.0  # chocó con el límite, pierde el impulso
+
+	# el tambaleo depende de la velocidad, así que con momentum desbalancea más
+	sword_sway += sword_vel * delta * tilt_intensity * 5.0
+
+
+func _physics_process(delta: float) -> void:
 	if is_pivot:
 		pivott(delta)
 		return
@@ -114,6 +159,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	update_animation_state()
+	update_sword_aim(delta)
 	tilt(delta)
 
 #STATE MACHINE
@@ -178,6 +224,8 @@ func throw_sword() -> void:
 	sword.visible = false
 	has_sword = false
 	active_sword_instance = embedded_sword
+	sword_vel = Vector2.ZERO
+	aim_hold = Vector2.ZERO
 
 # recoger la espada
 func retrieve_sword() -> void:
@@ -233,6 +281,10 @@ func stop_pivot() -> void:
 	is_pivot = false
 	sword.transform = pivot_sword
 	sword_sway = Vector2.ZERO
+	sword_vel = Vector2.ZERO
+	aim_hold = Vector2.ZERO
+	aim_idle = Vector2.ZERO
+	mouse_input = Vector2.ZERO
 
 func pivott(delta: float) -> void:
 	pivot_time += delta
@@ -268,4 +320,4 @@ func pivott(delta: float) -> void:
 		velocity += Vector3.UP * 2.0
 		stop_pivot()
 	elif pivot_time > 0.3 and is_on_floor():
-		stop_pivot() 
+		stop_pivot()
