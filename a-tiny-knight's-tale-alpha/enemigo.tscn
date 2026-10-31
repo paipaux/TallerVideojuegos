@@ -17,7 +17,7 @@ material = SubResource("StandardMaterial3D_aju8y")
 size = Vector3(1.0664063, 1, 1.1279297)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j8qs0"]
-size = Vector3(1.0657959, 0.272583, 1.1279907)
+size = Vector3(1.0657959, 0.64138794, 1.1279907)
 
 [node name="Enemigo" type="CharacterBody3D" unique_id=1672550888]
 script = ExtResource("1_bnx68")
@@ -33,6 +33,8 @@ script = ExtResource("1_becj5")
 metadata/_custom_type_script = "uid://hkk3ntjtv5qt"
 
 [node name="HitboxComponent" type="Area3D" parent="." unique_id=1959385991]
+collision_layer = 8
+collision_mask = 6
 script = ExtResource("2_moxti")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent" unique_id=76625392]
@@ -40,8 +42,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013823986, -0.07818228, 0.0
 shape = SubResource("BoxShape3D_gnkvg")
 
 [node name="HurtboxComponent" type="Area3D" parent="." unique_id=1287155608]
+collision_layer = 8
+collision_mask = 4
 script = ExtResource("3_bnx68")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent" unique_id=103647950]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015979648, 0.5767532, 0.0093688965)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015979648, 0.39235073, 0.0093688965)
 shape = SubResource("BoxShape3D_j8qs0")

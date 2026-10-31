@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @onready var health_component: HealthComponent = $HealthComponent
 
-@export var speed: float = 3.0 # Velocidad de movimiento del enemigo
+@export var speed: float = 1.0 # Velocidad de movimiento del enemigo
 var player: Node3D = null
 
 func _ready() -> void:
