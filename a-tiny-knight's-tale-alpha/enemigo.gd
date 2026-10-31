@@ -25,7 +25,7 @@ func _physics_process(delta: float) -> void:
 		
 		# añadimos gravedad
 		if not is_on_floor():
-			velocity.y -= 9.8 * delta
+			velocity.y -= 5.8 * delta
 	else:
 		# si por alguna razón no encuentra al jugador, se detiene
 		velocity.x = move_toward(velocity.x, 0, speed)

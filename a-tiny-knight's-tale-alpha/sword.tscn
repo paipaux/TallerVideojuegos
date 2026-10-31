@@ -8,7 +8,10 @@ size = Vector3(0.5, 3, 0.5)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_noskj"]
 radius = 0.55029297
-height = 3.407837
+height = 3.0643616
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hqtel"]
+size = Vector3(1, 2.9770508, 0.3223877)
 
 [node name="Node3D" type="Node3D" unique_id=1482983665]
 
@@ -20,6 +23,7 @@ visible = false
 mesh = SubResource("BoxMesh_m8r1m")
 
 [node name="Sword_Hitbox" type="Area3D" parent="." unique_id=980224601]
+visible = false
 collision_layer = 4
 collision_mask = 9
 script = ExtResource("2_e4ynd")
@@ -27,3 +31,11 @@ script = ExtResource("2_e4ynd")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sword_Hitbox" unique_id=369995590]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4190063, 0)
 shape = SubResource("CapsuleShape3D_noskj")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1807689242]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=133445880]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6026459, -0.014587402)
+shape = SubResource("BoxShape3D_hqtel")
