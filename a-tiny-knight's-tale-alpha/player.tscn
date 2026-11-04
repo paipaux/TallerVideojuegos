@@ -9,6 +9,10 @@
 radius = 0.1
 height = 0.4
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_1s8gj"]
+radius = 0.1
+height = 0.4
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hqtel"]
 animation = &"fall "
 
@@ -49,7 +53,7 @@ xfade_time = 0.2
 xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_57qmd"]
-states/End/position = Vector2(668, 100)
+states/End/position = Vector2(665, 100)
 states/Start/position = Vector2(100, 77)
 states/fall/node = SubResource("AnimationNodeAnimation_hqtel")
 states/fall/position = Vector2(436.43536, 59)
@@ -62,9 +66,8 @@ states/walk/position = Vector2(443.43536, 154)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_dw050"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_b26j0"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_n7ghd"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_nvl01"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_ivps1"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_sweqy"), "fall", "walk", SubResource("AnimationNodeStateMachineTransition_2hs0m"), "walk", "fall", SubResource("AnimationNodeStateMachineTransition_1jxqw"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_urp6f")]
 graph_offset = Vector2(43.43535, 0)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_1s8gj"]
-radius = 0.1
-height = 0.4
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
+size = Vector3(0.9, 2.8, 0.2)
 
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=100382861 groups=["jugador"]]
 collision_layer = 2
@@ -72,8 +75,12 @@ collision_mask = 9
 script = ExtResource("1_4flbx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=635650430]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01610139, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01610139, 0.009733975)
 shape = SubResource("CapsuleShape3D_m8r1m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1158652440]
+visible = false
+mesh = SubResource("CapsuleMesh_1s8gj")
 
 [node name="Model" type="Node3D" parent="." unique_id=529573730]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019052744, 0, -0.16047612)
@@ -81,10 +88,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019052744, 0, -0.16047612)
 [node name="TheHero" parent="Model" unique_id=1577262880 instance=ExtResource("2_sweqy")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.016688973, -0.041174024, 0.1867649)
 
-[node name="Cube" parent="Model/TheHero/Skeleton3D" parent_id_path=PackedInt32Array(1577262880, 2054641607) index="0" unique_id=787135624]
+[node name="Skeleton3D" parent="Model/TheHero" index="0" unique_id=2054641607]
+bones/2/position = Vector3(-2.4674184e-17, 0.13528898, -0.22312674)
+bones/3/rotation = Quaternion(-0.707214, 8.42804e-08, -8.4307004e-08, 0.7069996)
+bones/6/rotation = Quaternion(-6.385589e-08, 1.7447935e-07, 0.025076475, 0.9996855)
+bones/7/rotation = Quaternion(1.5757966e-07, 6.505815e-10, -0.103732914, 0.9946052)
+bones/8/rotation = Quaternion(4.0856187e-14, 5.960463e-07, -4.0259327e-14, 1)
+bones/10/rotation = Quaternion(-6.385584e-08, -1.7447925e-07, -0.025076445, 0.9996855)
+bones/11/rotation = Quaternion(1.5757966e-07, -6.505261e-10, 0.103732914, 0.9946052)
+bones/12/rotation = Quaternion(4.0856187e-14, -5.960463e-07, 4.0259317e-14, 1)
+bones/13/rotation = Quaternion(0.6669287, 0.23463723, -0.23470823, 0.6671308)
+bones/14/rotation = Quaternion(-3.0933332e-08, -1.3330549e-07, 0.33187735, 0.94332254)
+bones/15/rotation = Quaternion(-2.2274277e-15, 7.1054274e-15, -1.4901179e-08, 1)
+bones/16/rotation = Quaternion(-0.7071068, -1.1520235e-07, 1.1520233e-07, 0.7071068)
+bones/17/rotation = Quaternion(0.6669287, -0.23463723, 0.23470823, 0.6671308)
+bones/18/rotation = Quaternion(-3.0933332e-08, 1.3330549e-07, -0.33187735, 0.94332254)
+bones/19/rotation = Quaternion(-2.2274277e-15, -7.1054274e-15, 1.4901179e-08, 1)
+bones/20/rotation = Quaternion(-0.7071068, 1.1520235e-07, -1.1520233e-07, 0.7071068)
+
+[node name="Cube" parent="Model/TheHero/Skeleton3D" index="0" unique_id=787135624]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.013046667, 0)
 
-[node name="TwoBoneIK3D" parent="Model/TheHero/Skeleton3D" parent_id_path=PackedInt32Array(1577262880, 2054641607) index="1" unique_id=1193173010]
+[node name="TwoBoneIK3D" parent="Model/TheHero/Skeleton3D" index="1" unique_id=1193173010]
 setting_count = 2
 settings/0/target_node = NodePath("../../../../sword/Marker3D_L")
 settings/0/pole_node = NodePath("../../../PoleNodeL")
@@ -133,8 +158,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06989518, -0.65401757, -0.
 [node name="Marker3D_L" type="Marker3D" parent="sword" unique_id=1717012526]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11052357, -0.49546903, 0.01442492)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1158652440]
-visible = false
-mesh = SubResource("CapsuleMesh_1s8gj")
+[node name="ShapeCast3D" type="ShapeCast3D" parent="sword" unique_id=175510039]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.451973, 0)
+shape = SubResource("BoxShape3D_g4v7s")
 
 [editable path="Model/TheHero"]

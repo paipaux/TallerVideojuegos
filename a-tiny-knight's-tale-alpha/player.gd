@@ -10,12 +10,27 @@ extends CharacterBody3D
 @export var mouse_boost_max: float = 1.5    # multiplicador del impulso tras mover el mouse sostenidamente
 @export var sword_accel_ramp: float = 0.5   # segundos moviendo en la misma dirección para llegar al boost máximo
 @export var mouse_idle_grace: float = 0.10  # segundos sin mover el mouse antes de perder el boost
-@export var sword_max_speed: float = 3.0    # velocidad angular máxima 
-@export var sword_damping: float = 0.5      # qué tan rápido se frena al dejar de mover el mouse
+@export var sword_max_speed: float = 4.0    # velocidad angular máxima 
+@export var sword_damping: float = 0.5   # qué tan rápido se frena al dejar de mover el mouse
 
 @export var tilt_intensity: float = 0.08
 @export var tilt_recovery: float = 9
 @export var trajectory_tilt: float = 0.6
+
+#Variables de movimiento de la espada
+#Se usan para guardar la orientación de la espada de modo que no se
+#voltee y altere de ese modo su movimiento (arregla error clamp)
+
+var sword_yaw: float = 0.0
+var sword_pitch: float = 0.0
+@onready var sword_cast: ShapeCast3D = $sword/ShapeCast3D #Detecta si la espada choca con el "mundo"
+
+#Variables para poder deslizar la espada si traspasa el "mundo" al mover personaje
+#Necesario ya que en caso contrario solo se calcula posición al mover espada estando en el suelo
+@export var sword_settle_speed: float = 5.0      # rad/s con que la espada sale de lo que atraviesa (+ alto sale más rápido)
+@export var sword_settle_step_deg: float = 0.5    # precisión de la búsqueda (menor = más preciso, más costoso)
+@export var sword_settle_max_deg: float = 120.0   # hasta qué ángulo busca una pose libre
+
 
 #Variables de Pivote
 
@@ -41,7 +56,6 @@ var is_pivot: bool = false
 var pivot_point: Vector3 = Vector3.ZERO
 var pivot_length: float = 0.0
 var pivot_time: float = 0.0
-var pivot_sword: Transform3D
 
 #Modelos 
 @onready var sword: Node3D = $sword
@@ -54,7 +68,7 @@ var pivot_sword: Transform3D
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 @onready var two_bone_ik_3d: TwoBoneIK3D = $Model/TheHero/Skeleton3D/TwoBoneIK3D
 
-#Estados de la maquina de estados 
+#Estados de la maquina de estados (animacion) 
 enum State { IDLE, WALK, JUMP, FALL }
 var state: State = State.IDLE
 
@@ -62,7 +76,10 @@ const swoooord = preload("res://sword_platform.tscn")
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	animation_tree.active = true
+	animation_tree.active = true #activar animation tree
+	sword_yaw = sword.rotation.y #Iniciar yaw y pitch para mov. espada
+	sword_pitch = sword.rotation.x
+	sword_cast.add_exception(self) #Iniciar cast espada para que no traspase el "mundo"
 	
 func _input(event):
 	# el mouse no mueve la espada directo, solo le da impulso (se consume en update_sword_aim)
@@ -83,6 +100,34 @@ func _input(event):
 		elif has_sword:
 			start_pivot()
 
+#Prueba si la espada choca con el "mundo" usando el cast
+#Devuelve True si es así (mov.ilegal)
+func _sword_hits(pitch: float, yaw: float) -> bool:
+	sword.rotation = Vector3(pitch, yaw, 0.0)
+	sword_cast.force_shapecast_update()
+	return sword_cast.is_colliding()
+
+const SETTLE_DIRS: Array[Vector2] = [Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1)]
+
+# Busca la pose libre más cercana y rota hacia ella. Devuelve false si no encontró ninguna.
+func _settle_sword(delta: float) -> bool:
+	var step: float = deg_to_rad(sword_settle_step_deg)
+	var max_angle: float = deg_to_rad(sword_settle_max_deg)
+	var angle: float = step
+
+	while angle <= max_angle:
+		for d in SETTLE_DIRS:
+			var target_pitch: float = sword_pitch + d.x * angle
+			var target_yaw: float = sword_yaw + d.y * angle
+			if not _sword_hits(target_pitch, target_yaw):
+				var max_step: float = sword_settle_speed * delta
+				sword_pitch = move_toward(sword_pitch, target_pitch, max_step)
+				sword_yaw = move_toward(sword_yaw, target_yaw, max_step)
+				sword_vel = Vector2.ZERO
+				return true
+		angle += step
+
+	return false
 
 # Movimiento de la espada con mouse: el mouse da impulso a una velocidad angular con inercia
 func update_sword_aim(delta: float) -> void:
@@ -112,17 +157,34 @@ func update_sword_aim(delta: float) -> void:
 
 	sword_vel = sword_vel.limit_length(sword_max_speed)
 
-	# aplicar la rotación
-	sword.rotation.y -= sword_vel.x * delta
+	# aplicar la rotación probando colisión por eje
+	# 1) si la espada quedó dentro de algo (salto, caída, caminar), se acomoda sola
+	var hitting: bool = _sword_hits(sword_pitch, sword_yaw)
+	var settling: bool = false
+	if hitting:
+		settling = _settle_sword(delta)
+	
+	# 2) si no se está acomodando, el mouse la mueve probando colisión por eje
+	if not settling:
 
-	var new_pitch: float = sword.rotation.x - sword_vel.y * delta
-	var limit: float = deg_to_rad(150)
-	sword.rotation.x = clampf(new_pitch, -limit, limit)
-	if absf(new_pitch) > limit:
-		sword_vel.y = 0.0  # chocó con el límite, pierde el impulso
+		# yaw, se calcula rotación respecto al eje y de la espada 
+		# ej. decir que "no" con la cabeza
+		var new_yaw: float = sword_yaw - sword_vel.x * delta
+		if not hitting and _sword_hits(sword_pitch, new_yaw):
+			sword_vel.x = 0.0
+		else:
+			sword_yaw = wrapf(new_yaw, -PI, PI)
 
-	# el tambaleo depende de la velocidad, así que con momentum desbalancea más
-	sword_sway += sword_vel * delta * tilt_intensity * 5.0
+		# pitch, se calcula rotación respecto al eje x de la espada
+		# ej. decir que "si" con la cabeza
+		var new_pitch: float = sword_pitch - sword_vel.y * delta
+		if not hitting and _sword_hits(new_pitch, sword_yaw):
+			sword_vel.y = 0.0
+		else:
+			sword_pitch = wrapf(new_pitch, -PI, PI)
+	
+	#Aplicar movimiento calculado de la espada
+	sword.rotation = Vector3(sword_pitch, sword_yaw, 0.0)
 
 
 func _physics_process(delta: float) -> void:
@@ -285,7 +347,6 @@ func start_pivot() -> void:
 	pivot_point = hit
 	pivot_length = length
 	pivot_time = 0.0
-	pivot_sword = sword.transform
 	is_pivot = true
 
 	var radial: Vector3 = (global_position - hit).normalized()
@@ -299,13 +360,16 @@ func start_pivot() -> void:
 
 func stop_pivot() -> void:
 	is_pivot = false
-	sword.transform = pivot_sword
+	sword.rotation = Vector3(sword_pitch, sword_yaw, 0.0)
 	sword_sway = Vector2.ZERO
 	sword_vel = Vector2.ZERO
 	aim_hold = Vector2.ZERO
 	aim_idle = Vector2.ZERO
 	mouse_input = Vector2.ZERO
 
+#OJOOO REVISAR MÁS ADELANTE, DSP DE PIVOT ESPADA SE RESETEA A POSICION ORIGINAL
+#ESTO SE DEBE A LOS CAMBIOS HECHOS PARA ARREGLAR CLAMP
+#OJALÁ REWORK DE PIVOT SI SE PUEDE
 func pivott(delta: float) -> void:
 	pivot_time += delta
 	var offset: Vector3 = global_position - pivot_point
