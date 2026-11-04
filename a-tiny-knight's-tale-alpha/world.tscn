@@ -54,3 +54,13 @@ transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08
 
 [node name="FlyEnemy" parent="." unique_id=359152293 instance=ExtResource("7_pkg7o")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 4.0521646, -4.141318)
+visible = false
+
+[node name="FlyEnemy2" parent="." unique_id=521401207 instance=ExtResource("7_pkg7o")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.4774237, 2.8855577, -26.572672)
+
+[node name="FlyEnemy3" parent="." unique_id=284328472 instance=ExtResource("7_pkg7o")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.0666618, 2.5420408, -24.986265)
+
+[node name="FlyEnemy4" parent="." unique_id=1270466750 instance=ExtResource("7_pkg7o")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.6218681, 1.6348124, -26.65457)
