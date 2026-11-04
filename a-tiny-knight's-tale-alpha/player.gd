@@ -17,7 +17,7 @@ extends CharacterBody3D
 @export var tilt_recovery: float = 9
 @export var trajectory_tilt: float = 0.6
 
-#Varaibles de Pivote
+#Variables de Pivote
 
 @export var min_pivot_length: float = 1.0 # distancia para pivotear
 @export var boost_inicial: float = 2.5 # fuerza con la que "salta"
@@ -52,6 +52,7 @@ var pivot_sword: Transform3D
 @onready var animation_player: AnimationPlayer = $Model/AnimationPlayer
 @onready var animation_tree: AnimationTree = $Model/AnimationTree
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
+@onready var two_bone_ik_3d: TwoBoneIK3D = $Model/TheHero/Skeleton3D/TwoBoneIK3D
 
 #Estados de la maquina de estados 
 enum State { IDLE, WALK, JUMP, FALL }
@@ -179,18 +180,29 @@ func update_animation_state() -> void:
 	else:
 		var move_input := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		set_state(State.WALK if move_input.length() > 0.1 else State.IDLE)
+		
+# SETEAR ANIMACION BRAZOS
+func set_arm_ik(value: float) -> void:
+	var tween = create_tween()
+	tween.tween_property(two_bone_ik_3d, "influence", value, 0.2)
 
 # se tambalea si mueve la espada
+# Se tambalea si mueve la espada y recupera la postura al lanzarla
 func tilt(delta: float) -> void:
 	if has_sword:
 		var tilt_z: float = clamp(-sword_sway.x, -0.45, 0.45)
 		var tilt_x: float = clamp(sword_sway.y, -0.45, 0.45)
-	
+
 		model.rotation.z = lerp_angle(model.rotation.z, tilt_z, 12.0 * delta)
 		model.rotation.x = lerp_angle(model.rotation.x, tilt_x, 12.0 * delta)
-	
-		sword_sway = sword_sway.lerp(Vector2.ZERO, tilt_recovery * delta)
 
+	else:
+		# Recuperar la postura original
+		model.rotation.z = lerp_angle(model.rotation.z, 0.0, 8.0 * delta)
+		model.rotation.x = lerp_angle(model.rotation.x, 0.0, 8.0 * delta)
+
+	# Recuperar gradualmente el sway
+	sword_sway = sword_sway.lerp(Vector2.ZERO, tilt_recovery * delta)
 
 func throw_sword() -> void:
 	var tip_local := Vector3(0, 1.25, 0)  # se puede ir cambiando el 1.25 por otros para que no quede flotando o rara
@@ -221,12 +233,19 @@ func throw_sword() -> void:
 	embedded_sword.global_transform = sword.global_transform
 	embedded_sword.global_position = hit_position
 
+	# si la espada esta en el boton
+	var btn = result.collider
+	
+	if btn and btn.has_method("on_sword_pressed"):
+		btn.on_sword_pressed(embedded_sword)
+
 	sword.visible = false
 	has_sword = false
 	active_sword_instance = embedded_sword
 	sword_vel = Vector2.ZERO
 	aim_hold = Vector2.ZERO
-
+	set_arm_ik(0.0) #hacer que brazos no sigan espada
+	
 # recoger la espada
 func retrieve_sword() -> void:
 	if active_sword_instance and is_instance_valid(active_sword_instance):
@@ -236,6 +255,7 @@ func retrieve_sword() -> void:
 			active_sword_instance = null
 			sword.visible = true
 			has_sword = true
+			set_arm_ik(1.0) #brazos siguen espada
 
 
 # pivtet

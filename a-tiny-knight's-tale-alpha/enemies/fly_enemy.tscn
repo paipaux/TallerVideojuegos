@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://csgv122vqt3uu"]
+[gd_scene format=3 uid="uid://hwebu52mxpb4"]
 
-[ext_resource type="Script" uid="uid://hkk3ntjtv5qt" path="res://components/health_component.gd" id="1_becj5"]
-[ext_resource type="Script" uid="uid://b7psqajbs4uja" path="res://enemigo.gd" id="1_bnx68"]
-[ext_resource type="Script" uid="uid://byef6115jvt8u" path="res://components/hitbox_component.gd" id="2_moxti"]
-[ext_resource type="Script" uid="uid://d2scaqlqkgoel" path="res://components/hurtbox_component.gd" id="3_bnx68"]
-[ext_resource type="Script" uid="uid://ckqrbg0d8chpj" path="res://enemy_healthbar.gd" id="5_j8qs0"]
+[ext_resource type="Script" uid="uid://djspsieg2pwee" path="res://enemies/fly_enemy.gd" id="1_ainqx"]
+[ext_resource type="Script" uid="uid://hkk3ntjtv5qt" path="res://components/health_component.gd" id="1_dvxfj"]
+[ext_resource type="Script" uid="uid://byef6115jvt8u" path="res://components/hitbox_component.gd" id="2_ainqx"]
+[ext_resource type="Script" uid="uid://d2scaqlqkgoel" path="res://components/hurtbox_component.gd" id="3_bfqo4"]
+[ext_resource type="Script" uid="uid://ckqrbg0d8chpj" path="res://enemies/enemy_healthbar.gd" id="4_hk0r0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aju8y"]
 albedo_color = Color(1, 0.13333334, 1, 1)
@@ -38,10 +38,9 @@ border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
-[node name="Enemigo" type="CharacterBody3D" unique_id=1672550888]
-collision_layer = 8
-collision_mask = 13
-script = ExtResource("1_bnx68")
+[node name="FlyEnemy" type="CharacterBody3D" unique_id=1672550888]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("1_ainqx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=745987776]
 mesh = SubResource("BoxMesh_gnkvg")
@@ -50,11 +49,13 @@ mesh = SubResource("BoxMesh_gnkvg")
 shape = SubResource("BoxShape3D_dib1w")
 
 [node name="HealthComponent" type="Node" parent="." unique_id=632862375]
-script = ExtResource("1_becj5")
+script = ExtResource("1_dvxfj")
 metadata/_custom_type_script = "uid://hkk3ntjtv5qt"
 
 [node name="HitboxComponent" type="Area3D" parent="." unique_id=1959385991]
-script = ExtResource("2_moxti")
+collision_layer = 8
+collision_mask = 6
+script = ExtResource("2_ainqx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent" unique_id=76625392]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013823986, -0.07818228, 0.008923948)
@@ -63,7 +64,7 @@ shape = SubResource("BoxShape3D_gnkvg")
 [node name="HurtboxComponent" type="Area3D" parent="." unique_id=1287155608 node_paths=PackedStringArray("health_component")]
 collision_layer = 8
 collision_mask = 4
-script = ExtResource("3_bnx68")
+script = ExtResource("3_bfqo4")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent" unique_id=103647950]
@@ -85,4 +86,4 @@ offset_bottom = 27.0
 theme_override_styles/background = SubResource("StyleBoxFlat_noskj")
 theme_override_styles/fill = SubResource("StyleBoxFlat_nrcyn")
 show_percentage = false
-script = ExtResource("5_j8qs0")
+script = ExtResource("4_hk0r0")
