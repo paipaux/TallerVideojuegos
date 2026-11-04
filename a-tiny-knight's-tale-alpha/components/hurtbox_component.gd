@@ -19,3 +19,4 @@ func _on_area_entered(area: Area3D) -> void:
 		health_component.health -= hitbox_component.damage
 		print(health_component.health)
 		hitbox_component.damage_dealt.emit()
+		hurt.emit(hitbox_component)
