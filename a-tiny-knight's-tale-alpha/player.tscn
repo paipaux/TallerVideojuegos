@@ -49,17 +49,17 @@ xfade_time = 0.2
 xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_57qmd"]
-states/End/position = Vector2(670, 100)
+states/End/position = Vector2(668, 100)
 states/Start/position = Vector2(100, 77)
-"states/fall /node" = SubResource("AnimationNodeAnimation_hqtel")
-"states/fall /position" = Vector2(436.43536, 59)
+states/fall/node = SubResource("AnimationNodeAnimation_hqtel")
+states/fall/position = Vector2(436.43536, 59)
 states/idle/node = SubResource("AnimationNodeAnimation_sweqy")
 states/idle/position = Vector2(249.43535, 154)
 states/jump/node = SubResource("AnimationNodeAnimation_2hs0m")
 states/jump/position = Vector2(295.43536, 45)
 states/walk/node = SubResource("AnimationNodeAnimation_1jxqw")
 states/walk/position = Vector2(443.43536, 154)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_dw050"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_b26j0"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_n7ghd"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_nvl01"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_ivps1"), "jump", "fall ", SubResource("AnimationNodeStateMachineTransition_sweqy"), "fall ", "walk", SubResource("AnimationNodeStateMachineTransition_2hs0m"), "walk", "fall ", SubResource("AnimationNodeStateMachineTransition_1jxqw"), "fall ", "idle", SubResource("AnimationNodeStateMachineTransition_urp6f")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_dw050"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_b26j0"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_n7ghd"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_nvl01"), "walk", "jump", SubResource("AnimationNodeStateMachineTransition_ivps1"), "jump", "fall", SubResource("AnimationNodeStateMachineTransition_sweqy"), "fall", "walk", SubResource("AnimationNodeStateMachineTransition_2hs0m"), "walk", "fall", SubResource("AnimationNodeStateMachineTransition_1jxqw"), "fall", "idle", SubResource("AnimationNodeStateMachineTransition_urp6f")]
 graph_offset = Vector2(43.43535, 0)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_1s8gj"]
