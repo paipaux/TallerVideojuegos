@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cencrmqrnvse" path="res://others/button.gd" id="1_alww8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yf5fn"]
-albedo_color = Color(5.583167e-06, 0.77503055, 0.839703, 1)
+albedo_color = Color(0.9931802, 0.5634743, 1.1551381e-06, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_g4v7s"]
 height = 0.2

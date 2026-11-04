@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c5p76s5u8003c" path="res://levels/level_1.tscn" id="1_dwbse"]
 [ext_resource type="PackedScene" uid="uid://blbbvdfbj2gug" path="res://player.tscn" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://dvsrqp7g3txk5" path="res://pause_menu.tscn" id="2_fj7yv"]
-[ext_resource type="PackedScene" uid="uid://csgv122vqt3uu" path="res://enemigo.tscn" id="3_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://csgv122vqt3uu" path="res://enemies/enemigo.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://c0y8na0vgvlwr" path="res://others/button.tscn" id="4_036b0"]
 [ext_resource type="PackedScene" uid="uid://ttqtnkkjwlde" path="res://others/door.tscn" id="5_dwbse"]
 
@@ -40,10 +40,10 @@ current = true
 [node name="PauseMenu" parent="." unique_id=1998557336 instance=ExtResource("2_fj7yv")]
 
 [node name="Enemigo" parent="." unique_id=1672550888 instance=ExtResource("3_tlwt5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.5, 7)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3993707, 0.5, 1.6131086)
 
 [node name="Enemigo2" parent="." unique_id=1289705993 instance=ExtResource("3_tlwt5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4749756, 0.5, 4.0895967)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.405182, 0.5, 2.8391457)
 
 [node name="Button" parent="." unique_id=922361026 instance=ExtResource("4_036b0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3, -0.9, -18)
