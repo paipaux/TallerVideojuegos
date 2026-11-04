@@ -221,6 +221,12 @@ func throw_sword() -> void:
 	embedded_sword.global_transform = sword.global_transform
 	embedded_sword.global_position = hit_position
 
+	# si la espada esta en el boton
+	var btn = result.collider
+	
+	if btn and btn.has_method("on_sword_pressed"):
+		btn.on_sword_pressed(embedded_sword)
+
 	sword.visible = false
 	has_sword = false
 	active_sword_instance = embedded_sword
