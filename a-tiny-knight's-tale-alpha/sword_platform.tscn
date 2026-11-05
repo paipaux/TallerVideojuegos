@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://cjwgkar70y6sw"]
 
+[ext_resource type="PackedScene" uid="uid://vtshhx2d4jil" path="res://assets/models/BigSword.glb" id="1_5qqei"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_dib1w"]
 size = Vector3(0.5, 3, 0.5)
 
@@ -8,7 +10,11 @@ size = Vector3(0.5, 3, 0.5)
 
 [node name="StaticBody3D" type="StaticBody3D" unique_id=1951014335]
 
+[node name="BigSword" parent="." unique_id=405338308 instance=ExtResource("1_5qqei")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.264739, 0)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=98215129]
+visible = false
 mesh = SubResource("BoxMesh_dib1w")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=764645257]

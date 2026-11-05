@@ -134,7 +134,7 @@ shader_parameter/transparency_multiplier = 1.0
 shader_parameter/cloud_thickness = 28.24300133828262
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_gwceb"]
-size = Vector2(40, 60)
+size = Vector2(160, 240)
 subdivide_width = 60
 subdivide_depth = 60
 
@@ -143,13 +143,13 @@ render_priority = 0
 shader = ExtResource("6_btoec")
 shader_parameter/height_scale = 0.5
 shader_parameter/wave_speed = 0.1
-shader_parameter/upper_transparency = 0.89
-shader_parameter/global_transparency = 0.9
+shader_parameter/upper_transparency = 0.5
+shader_parameter/global_transparency = 0.6
 shader_parameter/time_factor = Vector2(2, 3)
 shader_parameter/uv1_scale = Vector3(0, 0, 0)
 shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/color1 = Color(0.9490196, 0.9882353, 0.95686275, 1)
-shader_parameter/color2 = Color(0.9164892, 0.8721569, 0.84804535, 1)
+shader_parameter/color1 = Color(1, 0.9882353, 1, 1)
+shader_parameter/color2 = Color(1, 1, 1, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_gnkvg"]
 radius = 3.0
@@ -426,21 +426,113 @@ material_override = SubResource("ShaderMaterial_n46q3")
 mesh = SubResource("PlaneMesh_gwceb")
 
 [node name="nube" type="MeshInstance3D" parent="." unique_id=276761104]
-transform = Transform3D(0.3592479, 0, 0.93324214, 0, 1, 0, -0.93324214, 0, 0.3592479, -0.9577539, -2.7413592, -4.0542235)
+transform = Transform3D(0.3592479, 0, 0.93324214, 0, 1, 0, -0.93324214, 0, 0.3592479, 0.9871867, -0.83656216, -4.0542235)
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube4" type="MeshInstance3D" parent="nube" unique_id=392903155]
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube6" type="MeshInstance3D" parent="nube" unique_id=81031662]
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube7" type="MeshInstance3D" parent="nube" unique_id=360025179]
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube8" type="MeshInstance3D" parent="." unique_id=1867032479]
+transform = Transform3D(0.3592479, 0, 0.93324214, 0, 1, 0, -0.93324214, 0, 0.3592479, -3.0884628, -1.2152505, -1.968937)
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube9" type="MeshInstance3D" parent="nube8" unique_id=1010945792]
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube10" type="MeshInstance3D" parent="nube8" unique_id=187835539]
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube11" type="MeshInstance3D" parent="nube8" unique_id=476658878]
 material_override = SubResource("ShaderMaterial_epsmf")
 mesh = SubResource("SphereMesh_gnkvg")
 
 [node name="nube5" type="MeshInstance3D" parent="." unique_id=1443978440]
-transform = Transform3D(0.3592479, 0, 0.93324214, 0, 1, 0, -0.93324214, 0, 0.3592479, 1.240032, -5.398392, -26.487774)
+transform = Transform3D(0.3592479, 0, 0.93324214, 0, 1, 0, -0.93324214, 0, 0.3592479, -1.4204028, -2.086966, -26.487774)
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube6" type="MeshInstance3D" parent="." unique_id=1707693088]
+transform = Transform3D(0.3592479, 0, 0.93324214, 0, 1, 0, -0.93324214, 0, 0.3592479, -6.9375877, -2.1692321, -18.243294)
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube11" type="MeshInstance3D" parent="nube6" unique_id=1307477226]
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube12" type="MeshInstance3D" parent="nube6" unique_id=2082965963]
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube13" type="MeshInstance3D" parent="." unique_id=1878161851]
+transform = Transform3D(0.3592479, 0, 0.93324214, 0, 1, 0, -0.93324214, 0, 0.3592479, 3.7289715, -3.1238103, -28.026487)
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube14" type="MeshInstance3D" parent="nube13" unique_id=1042416719]
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube15" type="MeshInstance3D" parent="nube13" unique_id=445217188]
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube7" type="MeshInstance3D" parent="." unique_id=778115218]
+transform = Transform3D(0.3592479, 0, 0.93324214, 0, 1, 0, -0.93324214, 0, 0.3592479, -7.8444614, -0.0045337677, -21.800661)
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube9" type="MeshInstance3D" parent="nube7" unique_id=1570736329]
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube10" type="MeshInstance3D" parent="nube7" unique_id=1932863390]
 material_override = SubResource("ShaderMaterial_epsmf")
 mesh = SubResource("SphereMesh_gnkvg")
 
 [node name="nube2" type="MeshInstance3D" parent="." unique_id=1557300130]
-transform = Transform3D(0.3592479, 0, 0.93324214, 0, 1, 0, -0.93324214, 0, 0.3592479, 2.3263934, -0.13283443, -14.3447)
+transform = Transform3D(0.3592479, 0, 0.93324214, 0, 1, 0, -0.93324214, 0, 0.3592479, 2.3263934, -1.4535153, -14.3447)
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube4" type="MeshInstance3D" parent="nube2" unique_id=1518247317]
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube5" type="MeshInstance3D" parent="nube2" unique_id=314589205]
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube6" type="MeshInstance3D" parent="nube2" unique_id=1835691615]
 material_override = SubResource("ShaderMaterial_epsmf")
 mesh = SubResource("SphereMesh_gnkvg")
 
 [node name="nube3" type="MeshInstance3D" parent="." unique_id=2144064387]
-transform = Transform3D(0.3592479, 0, 0.93324214, 0, 1, 0, -0.93324214, 0, 0.3592479, 5.362047, -2.0023088, 3.4631157)
+transform = Transform3D(0.3592479, 0, 0.93324214, 0, 1, 0, -0.93324214, 0, 0.3592479, 5.362047, -2.9662285, 3.4631157)
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube4" type="MeshInstance3D" parent="nube3" unique_id=870396037]
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube5" type="MeshInstance3D" parent="nube3" unique_id=1061852829]
+material_override = SubResource("ShaderMaterial_epsmf")
+mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="nube6" type="MeshInstance3D" parent="nube3" unique_id=1468017765]
 material_override = SubResource("ShaderMaterial_epsmf")
 mesh = SubResource("SphereMesh_gnkvg")
