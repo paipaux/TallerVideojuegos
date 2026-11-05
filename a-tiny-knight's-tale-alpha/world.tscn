@@ -2,18 +2,18 @@
 
 [ext_resource type="PackedScene" uid="uid://c5p76s5u8003c" path="res://levels/level_1.tscn" id="1_dwbse"]
 [ext_resource type="PackedScene" uid="uid://blbbvdfbj2gug" path="res://player.tscn" id="1_f3sb7"]
+[ext_resource type="Texture2D" uid="uid://blamemkh2srug" path="res://textures/EveningSkyHDRI039B_1K/EveningSkyHDRI039B_1K_TONEMAPPED.jpg" id="1_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://dvsrqp7g3txk5" path="res://pause_menu.tscn" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://csgv122vqt3uu" path="res://enemies/enemigo.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://c0y8na0vgvlwr" path="res://others/button.tscn" id="4_036b0"]
 [ext_resource type="PackedScene" uid="uid://ttqtnkkjwlde" path="res://others/door.tscn" id="5_dwbse"]
 [ext_resource type="PackedScene" uid="uid://hwebu52mxpb4" path="res://enemies/fly_enemy.tscn" id="7_pkg7o"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_35wq4"]
+panorama = ExtResource("1_gbfbk")
 
 [sub_resource type="Sky" id="Sky_fj7yv"]
-sky_material = SubResource("ProceduralSkyMaterial_f3sb7")
+sky_material = SubResource("PanoramaSkyMaterial_35wq4")
 
 [sub_resource type="Environment" id="Environment_tlwt5"]
 background_mode = 2
