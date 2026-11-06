@@ -39,6 +39,8 @@ border_width_bottom = 2
 border_color = Color(0, 0, 0, 1)
 
 [node name="Enemigo" type="CharacterBody3D" unique_id=1672550888]
+collision_layer = 8
+collision_mask = 13
 script = ExtResource("1_bnx68")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=745987776]
@@ -52,8 +54,6 @@ script = ExtResource("1_becj5")
 metadata/_custom_type_script = "uid://hkk3ntjtv5qt"
 
 [node name="HitboxComponent" type="Area3D" parent="." unique_id=1959385991]
-collision_layer = 8
-collision_mask = 6
 script = ExtResource("2_moxti")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent" unique_id=76625392]
