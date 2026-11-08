@@ -6,6 +6,22 @@
 [ext_resource type="Material" path="res://textures/Ground110_1K-JPG/Ground110_1K-JPG.tres" id="4_n46q3"]
 [ext_resource type="Shader" uid="uid://bwppbx3k6x4sc" path="res://textures/nubes.gdshader" id="5_n46q3"]
 [ext_resource type="Shader" uid="uid://dpqda3hqponxg" path="res://levels/nubesIndividuales.gdshader" id="6_btoec"]
+[ext_resource type="PackedScene" uid="uid://blbbvdfbj2gug" path="res://player.tscn" id="7_gwceb"]
+[ext_resource type="PackedScene" uid="uid://dvsrqp7g3txk5" path="res://pause_menu.tscn" id="8_08mmt"]
+[ext_resource type="PackedScene" uid="uid://csgv122vqt3uu" path="res://enemies/enemigo.tscn" id="9_5ot28"]
+[ext_resource type="PackedScene" uid="uid://hwebu52mxpb4" path="res://enemies/fly_enemy.tscn" id="10_aerfg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_08mmt"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_5ot28"]
+sky_material = SubResource("ProceduralSkyMaterial_08mmt")
+
+[sub_resource type="Environment" id="Environment_aerfg"]
+background_mode = 2
+sky = SubResource("Sky_5ot28")
+glow_enabled = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_g4v7s"]
 material = ExtResource("1_jirdo")
@@ -156,6 +172,13 @@ radius = 3.0
 height = 3.0
 
 [node name="Level1" type="Node3D" unique_id=1168310529]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1743341889]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1582067374]
+environment = SubResource("Environment_aerfg")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2084678107]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.15)
@@ -421,7 +444,7 @@ mesh = SubResource("BoxMesh_kx6l7")
 shape = SubResource("BoxShape3D_n46q3")
 
 [node name="nubeFondo" type="MeshInstance3D" parent="." unique_id=1388419756]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55605245, -0.626709, -10.541718)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.55605245, -0.62670994, -10.541718)
 material_override = SubResource("ShaderMaterial_n46q3")
 mesh = SubResource("PlaneMesh_gwceb")
 
@@ -536,3 +559,18 @@ mesh = SubResource("SphereMesh_gnkvg")
 [node name="nube6" type="MeshInstance3D" parent="nube3" unique_id=1468017765]
 material_override = SubResource("ShaderMaterial_epsmf")
 mesh = SubResource("SphereMesh_gnkvg")
+
+[node name="CharacterBody3D" parent="." unique_id=100382861 instance=ExtResource("7_gwceb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5023966, 2.4305255, 6.0796995)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=2030635326]
+transform = Transform3D(1, 0, 0, 0, 0.86288655, 0.50539774, 0, -0.50539774, 0.86288655, 0.050639153, 1.9368818, 2.048276)
+current = true
+
+[node name="PauseMenu" parent="." unique_id=1998557336 instance=ExtResource("8_08mmt")]
+
+[node name="Enemigo" parent="." unique_id=1672550888 instance=ExtResource("9_5ot28")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7787695, 0.49999905, 5.9631557)
+
+[node name="FlyEnemy" parent="." unique_id=7499318 instance=ExtResource("10_aerfg")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.9017625, 5.053321, -11.501282)

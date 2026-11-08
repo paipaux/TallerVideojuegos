@@ -1,0 +1,151 @@
+[gd_scene format=3 uid="uid://beivwyfmyfm8u"]
+
+[ext_resource type="Script" uid="uid://dke61gsyo0whm" path="res://small_enemy.gd" id="1_47khv"]
+[ext_resource type="PackedScene" uid="uid://d1a5leg0oyybt" path="res://assets/models/GnomeEnemy.glb" id="2_3fbh0"]
+[ext_resource type="AnimationLibrary" uid="uid://yx03i8eg6lkw" path="res://assets/models/GnomeEnemy_animations.glb" id="3_5m7j3"]
+[ext_resource type="Script" uid="uid://hkk3ntjtv5qt" path="res://components/health_component.gd" id="4_eonkd"]
+[ext_resource type="Script" uid="uid://byef6115jvt8u" path="res://components/hitbox_component.gd" id="5_tanoi"]
+[ext_resource type="Script" uid="uid://d2scaqlqkgoel" path="res://components/hurtbox_component.gd" id="6_8x1l7"]
+[ext_resource type="Script" uid="uid://ckqrbg0d8chpj" path="res://enemies/enemy_healthbar.gd" id="7_5ers7"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r5vyh"]
+animation = &"Attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h4cvu"]
+animation = &"Damage"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p4pux"]
+animation = &"Idle "
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_47khv"]
+animation = &"Walk "
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_idafo"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4dghe"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f60k8"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x31d3"]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xejkt"]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_feooe"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2stfh"]
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fhegw"]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dt31e"]
+xfade_time = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_47khv"]
+xfade_time = 0.2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_g4v7s"]
+states/Attack/node = SubResource("AnimationNodeAnimation_r5vyh")
+states/Attack/position = Vector2(422, 49)
+states/Damage/node = SubResource("AnimationNodeAnimation_h4cvu")
+states/Damage/position = Vector2(471, 251)
+states/End/position = Vector2(668, 64)
+states/Idle/node = SubResource("AnimationNodeAnimation_p4pux")
+states/Idle/position = Vector2(371, 159.58052)
+states/Walk/node = SubResource("AnimationNodeAnimation_47khv")
+states/Walk/position = Vector2(591, 159.58052)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_idafo"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_4dghe"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_f60k8"), "Idle", "Damage", SubResource("AnimationNodeStateMachineTransition_x31d3"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_xejkt"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_feooe"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_2stfh"), "Walk", "Damage", SubResource("AnimationNodeStateMachineTransition_fhegw"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_dt31e"), "Damage", "Idle", SubResource("AnimationNodeStateMachineTransition_47khv")]
+graph_offset = Vector2(0, 15.580517)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dib1w"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gnkvg"]
+size = Vector3(1.0664063, 1, 1.1279297)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j8qs0"]
+size = Vector3(1.0657959, 0.64138794, 1.1279907)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_noskj"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_noskj"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nrcyn"]
+bg_color = Color(0.49760795, 0.6642718, 0.2443122, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+
+[node name="Enemigo" type="CharacterBody3D" unique_id=1672550888]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+collision_layer = 8
+collision_mask = 13
+script = ExtResource("1_47khv")
+
+[node name="Model" type="Node3D" parent="." unique_id=2075065664]
+
+[node name="SmallEnemy" parent="Model" unique_id=1043249932 instance=ExtResource("2_3fbh0")]
+transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, 0, -0.42578655, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Model/SmallEnemy" unique_id=216118208]
+libraries/ = ExtResource("3_5m7j3")
+
+[node name="AnimationTree" type="AnimationTree" parent="Model/SmallEnemy" unique_id=1729196184]
+tree_root = SubResource("AnimationNodeStateMachine_g4v7s")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2028497217]
+shape = SubResource("BoxShape3D_dib1w")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=632862375]
+script = ExtResource("4_eonkd")
+metadata/_custom_type_script = "uid://hkk3ntjtv5qt"
+
+[node name="HitboxComponent" type="Area3D" parent="." unique_id=1959385991]
+script = ExtResource("5_tanoi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent" unique_id=76625392]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013823986, -0.07818228, 0.008923948)
+shape = SubResource("BoxShape3D_gnkvg")
+
+[node name="HurtboxComponent" type="Area3D" parent="." unique_id=1287155608 node_paths=PackedStringArray("health_component")]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("6_8x1l7")
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent" unique_id=103647950]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015979648, 0.39235073, 0.0093688965)
+shape = SubResource("BoxShape3D_j8qs0")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=2077492161]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 1.1105288, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_noskj")
+
+[node name="SubViewport" type="SubViewport" parent="." unique_id=1566802365]
+size = Vector2i(150, 27)
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport" unique_id=1551332913]
+custom_minimum_size = Vector2(150, 8)
+offset_right = 150.0
+offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_noskj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_nrcyn")
+show_percentage = false
+script = ExtResource("7_5ers7")

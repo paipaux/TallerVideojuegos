@@ -11,7 +11,7 @@ extends CharacterBody3D
 @export var sword_accel_ramp: float = 0.5   # segundos moviendo en la misma dirección para llegar al boost máximo
 @export var mouse_idle_grace: float = 0.10  # segundos sin mover el mouse antes de perder el boost
 @export var sword_max_speed: float = 4.0    # velocidad angular máxima 
-@export var sword_damping: float = 0.5   # qué tan rápido se frena al dejar de mover el mouse
+@export var sword_damping: float = 0.5  # qué tan rápido se frena al dejar de mover el mouse
 
 @export var tilt_intensity: float = 0.08
 @export var tilt_recovery: float = 9
@@ -35,7 +35,7 @@ var sword_pitch: float = 0.0
 #Variables de Pivote
 
 @export var min_pivot_length: float = 1.0 # distancia para pivotear
-@export var boost_inicial: float = 2.5 # fuerza con la que "salta"
+@export var boost_inicial: float = 3.0 # fuerza con la que "salta"
 @export var pivot_gravity: float = 0.6 # gravedad se reduce al pivotear
 @export var pivot_push: float = 6.0 # cuanto se puede empujar en el pivote
 
@@ -185,7 +185,12 @@ func update_sword_aim(delta: float) -> void:
 	
 	#Aplicar movimiento calculado de la espada
 	sword.rotation = Vector3(sword_pitch, sword_yaw, 0.0)
+	
+		#Aplicar movimiento calculado de la espada
+	sword.rotation = Vector3(sword_pitch, sword_yaw, 0.0)
 
+	# el tambaleo depende de la velocidad, así que con momentum desbalancea más
+	sword_sway += sword_vel * delta * tilt_intensity * 5.0
 
 func _physics_process(delta: float) -> void:
 	if is_pivot:
