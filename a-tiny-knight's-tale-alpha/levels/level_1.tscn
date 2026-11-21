@@ -6,7 +6,6 @@
 [ext_resource type="Material" path="res://textures/Ground110_1K-JPG/Ground110_1K-JPG.tres" id="4_n46q3"]
 [ext_resource type="Shader" uid="uid://bwppbx3k6x4sc" path="res://textures/nubes.gdshader" id="5_n46q3"]
 [ext_resource type="Shader" uid="uid://dpqda3hqponxg" path="res://levels/nubesIndividuales.gdshader" id="6_btoec"]
-[ext_resource type="PackedScene" uid="uid://blbbvdfbj2gug" path="res://player.tscn" id="7_gwceb"]
 [ext_resource type="PackedScene" uid="uid://dvsrqp7g3txk5" path="res://pause_menu.tscn" id="8_08mmt"]
 [ext_resource type="PackedScene" uid="uid://csgv122vqt3uu" path="res://enemies/enemigo.tscn" id="9_5ot28"]
 [ext_resource type="PackedScene" uid="uid://hwebu52mxpb4" path="res://enemies/fly_enemy.tscn" id="10_aerfg"]
@@ -559,13 +558,6 @@ mesh = SubResource("SphereMesh_gnkvg")
 [node name="nube6" type="MeshInstance3D" parent="nube3" unique_id=1468017765]
 material_override = SubResource("ShaderMaterial_epsmf")
 mesh = SubResource("SphereMesh_gnkvg")
-
-[node name="CharacterBody3D" parent="." unique_id=100382861 instance=ExtResource("7_gwceb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5023966, 2.4305255, 6.0796995)
-
-[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=2030635326]
-transform = Transform3D(1, 0, 0, 0, 0.86288655, 0.50539774, 0, -0.50539774, 0.86288655, 0.050639153, 1.9368818, 2.048276)
-current = true
 
 [node name="PauseMenu" parent="." unique_id=1998557336 instance=ExtResource("8_08mmt")]
 

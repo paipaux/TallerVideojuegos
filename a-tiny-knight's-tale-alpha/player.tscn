@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://cns74580fhcb3" path="res://sword.tscn" id="2_onrkg"]
 [ext_resource type="PackedScene" uid="uid://boeebhyco7w3t" path="res://assets/models/the_hero.tscn" id="2_sweqy"]
 [ext_resource type="AnimationLibrary" uid="uid://cac5nvrmp60j" path="res://assets/models/TheHero_animations.glb" id="3_sweqy"]
+[ext_resource type="PackedScene" uid="uid://bg3xi6tyvs5ir" path="res://player_interface.tscn" id="5_sweqy"]
+[ext_resource type="Script" uid="uid://hkk3ntjtv5qt" path="res://components/health_component.gd" id="6_1jxqw"]
+[ext_resource type="Script" uid="uid://d2scaqlqkgoel" path="res://components/hurtbox_component.gd" id="7_dw050"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m8r1m"]
 radius = 0.1
@@ -69,6 +72,10 @@ graph_offset = Vector2(43.43535, 0)
 [sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
 size = Vector3(0.9, 2.8, 0.2)
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1jxqw"]
+radius = 0.1
+height = 0.4
+
 [node name="CharacterBody3D" type="CharacterBody3D" unique_id=100382861 groups=["jugador"]]
 collision_layer = 2
 collision_mask = 9
@@ -88,26 +95,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019052744, 0, -0.16047612)
 [node name="TheHero" parent="Model" unique_id=1577262880 instance=ExtResource("2_sweqy")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.016688973, -0.041174024, 0.1867649)
 
-[node name="Skeleton3D" parent="Model/TheHero" index="0" unique_id=2054641607]
-bones/1/position = Vector3(0, 0.13443641, 0)
-bones/2/position = Vector3(1.965584e-14, 0.12185444, -0.22312674)
+[node name="Skeleton3D" parent="Model/TheHero" index="0" unique_id=796293924]
+bones/1/position = Vector3(0, 0.053625546, 0)
+bones/2/position = Vector3(-1.2081459e-14, 0.041043572, -0.22312674)
 bones/3/rotation = Quaternion(-0.707214, 8.42804e-08, -8.4307004e-08, 0.7069996)
-bones/6/rotation = Quaternion(-6.432851e-08, 1.735959e-07, 0.021691235, 0.9997648)
-bones/7/rotation = Quaternion(1.5758191e-07, 6.505451e-10, -0.10582795, 0.9943845)
+bones/6/rotation = Quaternion(-2.8800699e-08, 1.7435154e-07, 0.001322657, 0.9999992)
+bones/7/rotation = Quaternion(1.7933098e-07, 6.695993e-10, -0.11794219, 0.99302053)
 bones/8/rotation = Quaternion(4.0856187e-14, 5.960463e-07, -4.0259327e-14, 1)
-bones/10/rotation = Quaternion(-6.4328475e-08, -1.7359581e-07, -0.02169122, 0.9997648)
-bones/11/rotation = Quaternion(1.5758195e-07, -6.5055406e-10, 0.10582797, 0.9943845)
+bones/10/rotation = Quaternion(-2.8800685e-08, -1.7435146e-07, -0.001322657, 0.9999992)
+bones/11/rotation = Quaternion(1.7933095e-07, -6.6956296e-10, 0.11794218, 0.99302053)
 bones/12/rotation = Quaternion(4.0856187e-14, -5.960463e-07, 4.0259317e-14, 1)
 bones/13/rotation = Quaternion(0.6669287, 0.23463723, -0.23470823, 0.6671308)
-bones/14/rotation = Quaternion(-0.033869088, -0.01191586, 0.3316634, 0.9427144)
-bones/15/rotation = Quaternion(0.06174551, -9.2007324e-10, -1.4872746e-08, 0.99809194)
-bones/16/rotation = Quaternion(-0.7289002, -1.1875293e-07, 1.11538746e-07, 0.6846199)
+bones/14/rotation = Quaternion(-0.23719531, -0.08344956, 0.3212145, 0.91301477)
+bones/15/rotation = Quaternion(0.43091375, 2.7507363e-09, -2.2894572e-08, 0.9023932)
+bones/16/rotation = Quaternion(-0.8450009, -8.648869e-08, 1.4587417e-07, 0.534765)
 bones/17/rotation = Quaternion(0.6669287, -0.23463723, 0.23470823, 0.6671308)
-bones/18/rotation = Quaternion(-0.033869088, 0.01191586, -0.3316634, 0.9427144)
-bones/19/rotation = Quaternion(0.06174551, 9.2007324e-10, 1.4872746e-08, 0.99809194)
-bones/20/rotation = Quaternion(-0.7289002, 1.1875293e-07, -1.11538746e-07, 0.6846199)
+bones/18/rotation = Quaternion(-0.23719534, 0.08344957, -0.3212145, 0.9130147)
+bones/19/rotation = Quaternion(0.43091378, -2.7507367e-09, 2.2894575e-08, 0.9023932)
+bones/20/rotation = Quaternion(-0.8450009, 8.648869e-08, -1.4587417e-07, 0.534765)
 
-[node name="Cube" parent="Model/TheHero/Skeleton3D" index="0" unique_id=787135624]
+[node name="Cube" parent="Model/TheHero/Skeleton3D" index="0" unique_id=237740154]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.013046667, 0)
 
 [node name="TwoBoneIK3D" parent="Model/TheHero/Skeleton3D" index="1" unique_id=1193173010]
@@ -163,4 +170,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.11052357, -0.49546903, 0.01
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.451973, 0)
 shape = SubResource("BoxShape3D_g4v7s")
 
+[node name="PlayerInterface" parent="." unique_id=1743347682 instance=ExtResource("5_sweqy")]
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1643550473]
+script = ExtResource("6_1jxqw")
+metadata/_custom_type_script = "uid://hkk3ntjtv5qt"
+
+[node name="HurtboxComponent" type="Area3D" parent="." unique_id=1637939772 node_paths=PackedStringArray("health_component")]
+collision_layer = 2
+script = ExtResource("7_dw050")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://d2scaqlqkgoel"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent" unique_id=1000873366]
+shape = SubResource("CapsuleShape3D_1jxqw")
+
 [editable path="Model/TheHero"]
+[editable path="sword"]

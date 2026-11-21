@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://csf4kiee5rhru"]
+
+[ext_resource type="Texture2D" uid="uid://ch2npvo0hwyr0" path="res://assets/health/heart_full.png" id="1_q48sc"]
+[ext_resource type="Script" uid="uid://8qdq8rticvwt" path="res://assets/health/heart.gd" id="2_8rus8"]
+[ext_resource type="Texture2D" uid="uid://cdpm47gnl0uk" path="res://assets/health/heart_half.png" id="3_cs8vt"]
+[ext_resource type="Texture2D" uid="uid://cir7a5x4353dv" path="res://assets/health/heart_empty.png" id="4_3dbau"]
+
+[sub_resource type="Animation" id="Animation_ft8fh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2wai4"]
+resource_name = "palpitar"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.7, 0.7), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_83vjd"]
+_data = {
+&"RESET": SubResource("Animation_ft8fh"),
+&"palpitar": SubResource("Animation_2wai4")
+}
+
+[node name="Heart" type="TextureRect" unique_id=1976643254]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_q48sc")
+script = ExtResource("2_8rus8")
+full = ExtResource("1_q48sc")
+half = ExtResource("3_cs8vt")
+empty = ExtResource("4_3dbau")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1433417403]
+libraries/ = SubResource("AnimationLibrary_83vjd")

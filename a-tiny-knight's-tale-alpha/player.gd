@@ -68,6 +68,12 @@ var pivot_time: float = 0.0
 @onready var playback: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 @onready var two_bone_ik_3d: TwoBoneIK3D = $Model/TheHero/Skeleton3D/TwoBoneIK3D
 
+# componentes de salud
+@onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
+@onready var health_component: HealthComponent = $HealthComponent
+@onready var health_bar: HeartsContainer = $PlayerInterface/HealthBar
+@onready var sword_hitbox: HitboxComponent = $sword/Sword_Hitbox
+
 #Estados de la maquina de estados (animacion) 
 enum State { IDLE, WALK, JUMP, FALL }
 var state: State = State.IDLE
@@ -75,12 +81,19 @@ var state: State = State.IDLE
 const swoooord = preload("res://sword_platform.tscn")
 
 func _ready():
+	add_to_group("jugador")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	animation_tree.active = true #activar animation tree
 	sword_yaw = sword.rotation.y #Iniciar yaw y pitch para mov. espada
 	sword_pitch = sword.rotation.x
 	sword_cast.add_exception(self) #Iniciar cast espada para que no traspase el "mundo"
-	
+
+	health_bar.setup(health_component)
+	health_component.died.connect(_on_died)
+
+func _on_died() -> void:
+	get_tree().reload_current_scene()
+
 func _input(event):
 	# el mouse no mueve la espada directo, solo le da impulso (se consume en update_sword_aim)
 	if has_sword and not is_pivot and event is InputEventMouseMotion:
@@ -106,6 +119,7 @@ func _sword_hits(pitch: float, yaw: float) -> bool:
 	sword.rotation = Vector3(pitch, yaw, 0.0)
 	sword_cast.force_shapecast_update()
 	return sword_cast.is_colliding()
+
 
 const SETTLE_DIRS: Array[Vector2] = [Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1)]
 
@@ -230,6 +244,7 @@ func _physics_process(delta: float) -> void:
 	update_sword_aim(delta)
 	tilt(delta)
 
+
 #STATE MACHINE
 #logica detras de las animaciones del personaje
 func set_state(new_state: State) -> void:
@@ -247,14 +262,13 @@ func update_animation_state() -> void:
 	else:
 		var move_input := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 		set_state(State.WALK if move_input.length() > 0.1 else State.IDLE)
-		
+
 # SETEAR ANIMACION BRAZOS
 func set_arm_ik(value: float) -> void:
 	var tween = create_tween()
 	tween.tween_property(two_bone_ik_3d, "influence", value, 0.2)
 
 # se tambalea si mueve la espada
-# Se tambalea si mueve la espada y recupera la postura al lanzarla
 func tilt(delta: float) -> void:
 	if has_sword:
 		var tilt_z: float = clamp(-sword_sway.x, -0.45, 0.45)
@@ -311,6 +325,7 @@ func throw_sword() -> void:
 	active_sword_instance = embedded_sword
 	sword_vel = Vector2.ZERO
 	aim_hold = Vector2.ZERO
+	sword_hitbox.set_deferred("monitorable", false)
 	set_arm_ik(0.0) #hacer que brazos no sigan espada
 	
 # recoger la espada
@@ -322,6 +337,7 @@ func retrieve_sword() -> void:
 			active_sword_instance = null
 			sword.visible = true
 			has_sword = true
+			sword_hitbox.set_deferred("monitorable", true)
 			set_arm_ik(1.0) #brazos siguen espada
 
 
