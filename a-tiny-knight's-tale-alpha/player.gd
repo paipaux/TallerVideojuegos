@@ -57,6 +57,9 @@ var pivot_point: Vector3 = Vector3.ZERO
 var pivot_length: float = 0.0
 var pivot_time: float = 0.0
 
+var spawn_pos: Vector3
+var is_dead: bool = false
+
 #Modelos 
 @onready var sword: Node3D = $sword
 @onready var model: Node3D = $Model
@@ -83,6 +86,7 @@ const swoooord = preload("res://sword_platform.tscn")
 func _ready():
 	add_to_group("jugador")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	spawn_pos = global_position
 	animation_tree.active = true #activar animation tree
 	sword_yaw = sword.rotation.y #Iniciar yaw y pitch para mov. espada
 	sword_pitch = sword.rotation.x
@@ -92,7 +96,29 @@ func _ready():
 	health_component.died.connect(_on_died)
 
 func _on_died() -> void:
-	get_tree().reload_current_scene()
+	if is_dead:
+		return
+
+	is_dead = true
+
+	if not has_sword:
+		if active_sword_instance:
+			active_sword_instance.queue_free()
+		
+		active_sword_instance = null
+		sword.visible = true
+		has_sword = true
+		sword_hitbox.set_deferred("monitorable", true)
+		set_arm_ik(1.0)
+
+	global_position = spawn_pos
+	velocity = Vector3.ZERO
+	sword_vel = Vector2.ZERO
+	sword_sway = Vector2.ZERO
+	mouse_input = Vector2.ZERO
+
+	health_component.health = health_component.max_health
+	is_dead = false
 
 func _input(event):
 	# el mouse no mueve la espada directo, solo le da impulso (se consume en update_sword_aim)

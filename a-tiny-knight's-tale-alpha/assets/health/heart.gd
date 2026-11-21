@@ -21,4 +21,3 @@ func update(health_heart: float, last_h: bool) -> void:
 	else: 
 		animation_player.stop()
 		scale = Vector2.ONE
-	
