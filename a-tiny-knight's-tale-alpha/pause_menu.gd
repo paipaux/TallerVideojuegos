@@ -14,10 +14,19 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("menu"):
-		get_tree().paused = not get_tree().paused
-		visible = get_tree().paused
-		
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if get_tree().paused else Input.MOUSE_MODE_CAPTURED
+		_set_paused(not get_tree().paused)
+
+func _set_paused(paused: bool) -> void:
+	get_tree().paused = paused
+	visible = paused
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if paused else Input.MOUSE_MODE_CAPTURED
+	# por qué no sale el mouseeeee -> habian dos menus de pausa xd
+	print("[PauseMenu: %s] paused=%s | visible=%s | mouse_mode=%s" % [
+		name,
+		get_tree().paused,
+		visible,
+		Input.mouse_mode
+	])
 
 func _on_resume_pressed() -> void:
 	get_tree().paused = false

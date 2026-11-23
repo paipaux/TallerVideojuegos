@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://c5p76s5u8003c" path="res://levels/level_1.tscn" id="1_dwbse"]
 [ext_resource type="PackedScene" uid="uid://blbbvdfbj2gug" path="res://player.tscn" id="1_f3sb7"]
 [ext_resource type="Texture2D" uid="uid://blamemkh2srug" path="res://textures/EveningSkyHDRI039B_1K/EveningSkyHDRI039B_1K_TONEMAPPED.jpg" id="1_gbfbk"]
-[ext_resource type="PackedScene" uid="uid://dvsrqp7g3txk5" path="res://pause_menu.tscn" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://csgv122vqt3uu" path="res://enemies/enemigo.tscn" id="3_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://c0y8na0vgvlwr" path="res://others/button.tscn" id="4_036b0"]
 [ext_resource type="PackedScene" uid="uid://ttqtnkkjwlde" path="res://others/door.tscn" id="5_dwbse"]
@@ -38,8 +37,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3947105, 4.1989326, 6.10498
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=1935531902]
 transform = Transform3D(1, 0, 0, 0, 0.87586033, 0.48256472, 0, -0.48256472, 0.87586033, 0, 1.5763236, 2.191794)
 current = true
-
-[node name="PauseMenu" parent="." unique_id=1998557336 instance=ExtResource("2_fj7yv")]
 
 [node name="Enemigo" parent="." unique_id=1672550888 instance=ExtResource("3_tlwt5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3993707, 0.5, 1.6131086)
