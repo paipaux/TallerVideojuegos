@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c0y8na0vgvlwr" path="res://others/button.tscn" id="4_036b0"]
 [ext_resource type="PackedScene" uid="uid://ttqtnkkjwlde" path="res://others/door.tscn" id="5_dwbse"]
 [ext_resource type="PackedScene" uid="uid://hwebu52mxpb4" path="res://enemies/fly_enemy.tscn" id="7_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://qcuesdd2xphj" path="res://levels/void_zone.tscn" id="9_ioo17"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_35wq4"]
 panorama = ExtResource("1_gbfbk")
@@ -64,3 +65,18 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -3.0666618, 2.5420408, 
 
 [node name="FlyEnemy4" parent="." unique_id=1270466750 instance=ExtResource("7_pkg7o")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.6218681, 1.6348124, -26.65457)
+
+[node name="VoidZone" parent="." unique_id=302785803 instance=ExtResource("9_ioo17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+
+[node name="VoidZone" parent="VoidZone" unique_id=1884052995 instance=ExtResource("9_ioo17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15, 0)
+
+[node name="VoidZone2" parent="VoidZone" unique_id=304258003 instance=ExtResource("9_ioo17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0)
+
+[node name="VoidZone3" parent="VoidZone" unique_id=1022116099 instance=ExtResource("9_ioo17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -25, 0)
+
+[node name="VoidZone4" parent="VoidZone" unique_id=496263259 instance=ExtResource("9_ioo17")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30, 0)

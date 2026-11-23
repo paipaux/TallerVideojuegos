@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://qcuesdd2xphj"]
+
+[ext_resource type="Script" uid="uid://dirxjx5gf5p3e" path="res://void_zone.gd" id="1_27fl3"]
+[ext_resource type="Script" uid="uid://byef6115jvt8u" path="res://components/hitbox_component.gd" id="2_6k4sy"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dib1w"]
+size = Vector3(200, 10, 200)
+
+[node name="VoidZone" type="Area3D" unique_id=302785803]
+collision_mask = 2
+script = ExtResource("1_27fl3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=614640935]
+shape = SubResource("BoxShape3D_dib1w")
+
+[node name="HitboxComponent" type="Area3D" parent="." unique_id=1139960953]
+script = ExtResource("2_6k4sy")
+metadata/_custom_type_script = "uid://byef6115jvt8u"
