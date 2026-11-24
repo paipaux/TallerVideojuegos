@@ -52,6 +52,9 @@ xfade_time = 0.2
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_urkea"]
+xfade_time = 0.2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_g4v7s"]
 states/Attack/node = SubResource("AnimationNodeAnimation_r5vyh")
 states/Attack/position = Vector2(422, 49)
@@ -61,8 +64,8 @@ states/End/position = Vector2(668, 64)
 states/Idle/node = SubResource("AnimationNodeAnimation_p4pux")
 states/Idle/position = Vector2(371, 159.58052)
 states/Walk/node = SubResource("AnimationNodeAnimation_47khv")
-states/Walk/position = Vector2(591, 159.58052)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_idafo"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_4dghe"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_f60k8"), "Idle", "Damage", SubResource("AnimationNodeStateMachineTransition_x31d3"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_xejkt"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_feooe"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_2stfh"), "Walk", "Damage", SubResource("AnimationNodeStateMachineTransition_fhegw"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_dt31e"), "Damage", "Idle", SubResource("AnimationNodeStateMachineTransition_47khv")]
+states/Walk/position = Vector2(590, 159.58052)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_idafo"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_4dghe"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_f60k8"), "Idle", "Damage", SubResource("AnimationNodeStateMachineTransition_x31d3"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_xejkt"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_feooe"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_2stfh"), "Walk", "Damage", SubResource("AnimationNodeStateMachineTransition_fhegw"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_dt31e"), "Damage", "Idle", SubResource("AnimationNodeStateMachineTransition_47khv"), "Attack", "Damage", SubResource("AnimationNodeStateMachineTransition_urkea")]
 graph_offset = Vector2(0, 15.580517)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dib1w"]

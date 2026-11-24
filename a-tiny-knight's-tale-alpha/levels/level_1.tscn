@@ -565,4 +565,4 @@ mesh = SubResource("SphereMesh_gnkvg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7787695, 0.49999905, 5.9631557)
 
 [node name="FlyEnemy" parent="." unique_id=7499318 instance=ExtResource("10_aerfg")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.9017625, 5.053321, -11.501282)
+transform = Transform3D(-0.4829629, 0, 0.12940957, 0, 0.5, 0, -0.12940957, 0, -0.4829629, 0.9017625, 5.053321, -11.501282)

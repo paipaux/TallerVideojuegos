@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c0y8na0vgvlwr" path="res://others/button.tscn" id="4_jh238"]
 [ext_resource type="PackedScene" uid="uid://ttqtnkkjwlde" path="res://others/door.tscn" id="5_f215i"]
 [ext_resource type="PackedScene" uid="uid://beivwyfmyfm8u" path="res://SmallEnemy.tscn" id="6_u63a2"]
+[ext_resource type="PackedScene" uid="uid://hwebu52mxpb4" path="res://enemies/fly_enemy.tscn" id="7_8eb3a"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -206,3 +207,6 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 2, 1.0512514, -8)
 
 [node name="Enemigo3" parent="." unique_id=1639714406 instance=ExtResource("6_u63a2")]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.2269044, 0.56125003, 3.936901)
+
+[node name="FlyEnemy" parent="." unique_id=1154287097 instance=ExtResource("7_8eb3a")]
+transform = Transform3D(-0.4996421, 0, 0.018914461, 0, 0.5, 0, -0.018914461, 0, -0.4996421, 3.930448, 2.9999952, 0.33628082)

@@ -10,6 +10,14 @@ extends CharacterBody3D
 @export var over_player: float = 0.1 # altura sobre el jugador se pone
 @export var acceleration: float = 10.0
 
+#animaciones
+@onready var animation_tree: AnimationTree = $Model/BatEnemy/AnimationTree
+var state_machine: AnimationNodeStateMachinePlayback
+#Tiempo antes de ejecutar proxima animacion de daño (no se sobrelapan golpes consecutivos)
+@export var damage_duration: float = 0.5
+var damage_timer_id: int = 0 
+var taking_damage: bool = false
+
 var player: Node3D = null
 var chasing: bool = false
 
@@ -17,6 +25,9 @@ var chasing: bool = false
 func _ready() -> void:
 	health_component.died.connect(_on_died)
 	hurtbox_component.hurt.connect(_on_hurt)
+	
+	state_machine = animation_tree.get("parameters/playback")
+	state_machine.state_finished.connect(_on_animation_state_finished)
 
 	# se busca al jugador
 	player = get_tree().get_first_node_in_group("jugador")
@@ -46,6 +57,7 @@ func _physics_process(delta: float) -> void:
 
 	# se mueve el personaje usando las físicas de Godot
 	move_and_slide()
+	_update_movement_animation()
 
 
 func _update_chase() -> void:
@@ -66,6 +78,9 @@ func _update_chase() -> void:
 		else:
 			chasing = false
 
+func _on_animation_state_finished(state: StringName) -> void:
+	if state == "attack":
+		_update_animation_state()
 
 func _on_hurt(hitbox: HitboxComponent) -> void:
 	var away := global_position - hitbox.global_position
@@ -75,6 +90,38 @@ func _on_hurt(hitbox: HitboxComponent) -> void:
 
 	chasing = true
 
+	taking_damage = true
+	state_machine.travel("damage")
+
+	damage_timer_id += 1
+	var current_timer := damage_timer_id
+
+	await get_tree().create_timer(damage_duration).timeout
+
+	if current_timer != damage_timer_id:
+		return
+
+	taking_damage = false
+	_update_animation_state()
+
+func _update_animation_state() -> void:
+	if chasing:
+		state_machine.travel("fly")
+	else:
+		state_machine.travel("idle")
+		
+
+func _update_movement_animation() -> void:
+	if taking_damage:
+		return
+
+	if state_machine.get_current_node() == "attack":
+		return
+
+	if velocity.length() > 0.1:
+		state_machine.travel("fly")
+	else:
+		state_machine.travel("idle")
 
 func _on_died() -> void:
 	queue_free()

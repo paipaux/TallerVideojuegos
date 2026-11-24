@@ -1,4 +1,3 @@
-
 extends "res://enemies/enemigo.gd"
 
 @onready var animation_tree: AnimationTree = $Model/SmallEnemy/AnimationTree

@@ -3,22 +3,89 @@
 [ext_resource type="Script" uid="uid://djspsieg2pwee" path="res://enemies/fly_enemy.gd" id="1_ainqx"]
 [ext_resource type="Script" uid="uid://hkk3ntjtv5qt" path="res://components/health_component.gd" id="1_dvxfj"]
 [ext_resource type="Script" uid="uid://byef6115jvt8u" path="res://components/hitbox_component.gd" id="2_ainqx"]
+[ext_resource type="PackedScene" uid="uid://ceeqirkaogxeu" path="res://assets/models/BatEnemy.glb" id="2_hk0r0"]
 [ext_resource type="Script" uid="uid://d2scaqlqkgoel" path="res://components/hurtbox_component.gd" id="3_bfqo4"]
+[ext_resource type="AnimationLibrary" uid="uid://bw4fmevta0soa" path="res://assets/models/BatEnemy_animations.glb" id="3_hkte3"]
 [ext_resource type="Script" uid="uid://ckqrbg0d8chpj" path="res://enemies/enemy_healthbar.gd" id="4_hk0r0"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aju8y"]
-albedo_color = Color(0.79703593, 0.4476273, 1, 1)
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hk0r0"]
+animation = &"attack"
 
-[sub_resource type="BoxMesh" id="BoxMesh_gnkvg"]
-material = SubResource("StandardMaterial3D_aju8y")
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_10q7o"]
+animation = &"damage"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hkte3"]
+animation = &"fly "
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dhyw2"]
+animation = &"idle "
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_10q7o"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rj75c"]
+xfade_time = 0.7
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_boc1q"]
+xfade_time = 0.4
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jc8fu"]
+xfade_time = 0.4
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wm5qi"]
+xfade_time = 0.4
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8s8hf"]
+xfade_time = 0.5
+switch_mode = 2
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pkh4s"]
+xfade_time = 0.4
+switch_mode = 2
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hkte3"]
+xfade_time = 0.4
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dhyw2"]
+xfade_time = 0.4
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_au0du"]
+xfade_time = 0.4
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j30bw"]
+xfade_time = 0.4
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hk0r0"]
+xfade_time = 0.4
+advance_mode = 0
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_g4v7s"]
+states/End/position = Vector2(514, 115)
+states/Start/position = Vector2(119, 154)
+states/attack/node = SubResource("AnimationNodeAnimation_hk0r0")
+states/attack/position = Vector2(328, 73)
+states/damage/node = SubResource("AnimationNodeAnimation_10q7o")
+states/damage/position = Vector2(350, 290)
+states/fly/node = SubResource("AnimationNodeAnimation_hkte3")
+states/fly/position = Vector2(460, 194)
+states/idle/node = SubResource("AnimationNodeAnimation_dhyw2")
+states/idle/position = Vector2(246, 194)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_10q7o"), "idle", "fly", SubResource("AnimationNodeStateMachineTransition_rj75c"), "fly", "idle", SubResource("AnimationNodeStateMachineTransition_boc1q"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_jc8fu"), "fly", "attack", SubResource("AnimationNodeStateMachineTransition_wm5qi"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_8s8hf"), "attack", "fly", SubResource("AnimationNodeStateMachineTransition_pkh4s"), "damage", "idle", SubResource("AnimationNodeStateMachineTransition_hkte3"), "idle", "damage", SubResource("AnimationNodeStateMachineTransition_dhyw2"), "fly", "damage", SubResource("AnimationNodeStateMachineTransition_au0du"), "attack", "damage", SubResource("AnimationNodeStateMachineTransition_j30bw"), "damage", "fly", SubResource("AnimationNodeStateMachineTransition_hk0r0")]
+graph_offset = Vector2(-27.031178, 78)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dib1w"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_gnkvg"]
-size = Vector3(1.0664063, 1, 1.1279297)
+size = Vector3(1.0390625, 0.98114014, 1.2739105)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j8qs0"]
-size = Vector3(1.0657959, 0.64138794, 1.1279907)
+size = Vector3(0.89291763, 0.94272244, 1.0239648)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_noskj"]
 viewport_path = NodePath("SubViewport")
@@ -42,10 +109,20 @@ border_color = Color(0, 0, 0, 1)
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("1_ainqx")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=745987776]
-mesh = SubResource("BoxMesh_gnkvg")
+[node name="Model" type="Node3D" parent="." unique_id=1035733727]
+
+[node name="BatEnemy" parent="Model" unique_id=817241145 instance=ExtResource("2_hk0r0")]
+transform = Transform3D(-2, 0, -1.7484555e-07, 0, 2, 0, 1.7484555e-07, 0, -2, 0.034784988, 0, 0.11080186)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Model/BatEnemy" unique_id=419872860]
+libraries/ = ExtResource("3_hkte3")
+
+[node name="AnimationTree" type="AnimationTree" parent="Model/BatEnemy" unique_id=692206833]
+tree_root = SubResource("AnimationNodeStateMachine_g4v7s")
+anim_player = NodePath("../AnimationPlayer")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2028497217]
+transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0.034784988, 0.15783113, 0.11080186)
 shape = SubResource("BoxShape3D_dib1w")
 
 [node name="HealthComponent" type="Node" parent="." unique_id=632862375]
@@ -53,26 +130,28 @@ script = ExtResource("1_dvxfj")
 metadata/_custom_type_script = "uid://hkk3ntjtv5qt"
 
 [node name="HitboxComponent" type="Area3D" parent="." unique_id=1959385991]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.4146303, -0.5369585)
 collision_layer = 8
 collision_mask = 6
 script = ExtResource("2_ainqx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent" unique_id=76625392]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013823986, -0.07818228, 0.008923948)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.0140096145, -0.08761221, 0.19415745)
 shape = SubResource("BoxShape3D_gnkvg")
 
 [node name="HurtboxComponent" type="Area3D" parent="." unique_id=1287155608 node_paths=PackedStringArray("health_component")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.7477619, 0.56706893)
 collision_layer = 8
 collision_mask = 4
 script = ExtResource("3_bfqo4")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent" unique_id=103647950]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015979648, 0.39235073, 0.0093688965)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.012264755, 0.48682272, -0.30056086)
 shape = SubResource("BoxShape3D_j8qs0")
 
 [node name="Sprite3D" type="Sprite3D" parent="." unique_id=2077492161]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 1.1105288, 0)
+transform = Transform3D(-0.8, 0, -6.9938224e-08, 0, 0.8, 0, 6.9938224e-08, 0, -0.8, 0.034784988, 1.1105288, 0.11080186)
 billboard = 1
 texture = SubResource("ViewportTexture_noskj")
 
