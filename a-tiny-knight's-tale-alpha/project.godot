@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="a_tiny_knight's_tale_alpha"
-run/main_scene="uid://doyf1ehil6ulo"
+run/main_scene="uid://fapcgpbdaumu"
 config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 

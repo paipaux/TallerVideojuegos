@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://vtshhx2d4jil" path="res://assets/models/BigSword.glb" id="1_74bdg"]
 [ext_resource type="Script" uid="uid://dqsf4m1ufgp48" path="res://sword_hitbox.gd" id="2_e4ynd"]
+[ext_resource type="PackedScene" uid="uid://dsi6em3hqyvjr" path="res://assets/models/BigSwordPAINTED.glb" id="3_r76a6"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_m8r1m"]
 size = Vector3(0.5, 3, 0.5)
@@ -11,11 +12,12 @@ radius = 0.55029297
 height = 3.0643616
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hqtel"]
-size = Vector3(1, 2.9770508, 0.3223877)
+size = Vector3(0.985, 2.527, 0.262)
 
 [node name="Node3D" type="Node3D" unique_id=1482983665]
 
 [node name="BigSword" parent="." unique_id=1971305203 instance=ExtResource("1_74bdg")]
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1405743878]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
@@ -37,5 +39,7 @@ collision_layer = 4
 collision_mask = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=133445880]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6026459, -0.014587402)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5503377, -0.015)
 shape = SubResource("BoxShape3D_hqtel")
+
+[node name="blockbench_export" parent="." unique_id=18794739 instance=ExtResource("3_r76a6")]

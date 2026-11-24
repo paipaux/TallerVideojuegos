@@ -34,7 +34,7 @@ var sword_pitch: float = 0.0
 
 #Variables de Pivote
 
-@export var min_pivot_length: float = 1.0 # distancia para pivotear
+@export var min_pivot_length: float = 0.5 # distancia para pivotear
 @export var boost_inicial: float = 3.0 # fuerza con la que "salta"
 @export var pivot_gravity: float = 0.6 # gravedad se reduce al pivotear
 @export var pivot_push: float = 6.0 # cuanto se puede empujar en el pivote
@@ -143,8 +143,10 @@ func _input(event):
 #Devuelve True si es así (mov.ilegal)
 func _sword_hits(pitch: float, yaw: float) -> bool:
 	sword.rotation = Vector3(pitch, yaw, 0.0)
+	sword_cast.force_update_transform()
 	sword_cast.force_shapecast_update()
-	return sword_cast.is_colliding()
+	var hit: bool = sword_cast.is_colliding()
+	return hit
 
 
 const SETTLE_DIRS: Array[Vector2] = [Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1)]
