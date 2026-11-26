@@ -2,23 +2,24 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ce84hlu4dp6f1"
-path="res://.godot/imported/Grass_0.png-1e38860afdf210097ab5f93820955da8.ctex"
+uid="uid://btf37u4y2si4h"
+path.s3tc="res://.godot/imported/grassmushroom_0.png-9599a84afb313b66cd545d5ce6f7da71.s3tc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 generator_parameters={
-"md5": "d64de461533d17c7933bd2d7fed19d7b"
+"md5": "cb84615431792b17c52974fbee20a90a"
 }
 
 [deps]
 
-source_file="res://assets/models/Grass_0.png"
-dest_files=["res://.godot/imported/Grass_0.png-1e38860afdf210097ab5f93820955da8.ctex"]
+source_file="res://assets/models/grassmushroom_0.png"
+dest_files=["res://.godot/imported/grassmushroom_0.png-9599a84afb313b66cd545d5ce6f7da71.s3tc.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
