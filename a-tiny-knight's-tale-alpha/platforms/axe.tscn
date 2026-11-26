@@ -27,7 +27,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5282855, 0)
 [node name="HitBox" type="Area3D" parent="Pivot" unique_id=680109198]
 script = ExtResource("3_0iwo6")
 damage = 20.0
-knockback_force = 7.0
+knockback_force = 6.0
 knockback_vertical = 4.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Pivot/HitBox" unique_id=1474279547]

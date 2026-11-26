@@ -78,7 +78,7 @@ var is_dead: bool = false
 @onready var sword_hitbox: HitboxComponent = $sword/Sword_Hitbox
 
 #Variables para el knockback del personaje
-@export var knockback_duration: float = 0.25
+@export var knockback_duration: float = 0.5
 var is_knocked_back: bool = false
 var knockback_timer: float = 0.0
 
@@ -266,12 +266,12 @@ func _physics_process(delta: float) -> void:
 	if is_knocked_back:
 		knockback_timer -= delta
 		move_and_slide()
+		if knockback_timer <= 0.0:
+			is_knocked_back = false
 		update_animation_state()
 		update_sword_aim(delta)
 		tilt(delta)
 	
-		if knockback_timer <= 0.0:
-			is_knocked_back = false
 		return
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
