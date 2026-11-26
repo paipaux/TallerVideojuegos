@@ -1,12 +1,16 @@
 [gd_scene format=3 uid="uid://ds35ddr25uvvw"]
 
+[ext_resource type="PackedScene" uid="uid://dail46yt8ibpy" path="res://platforms/damaging_spike.tscn" id="1_f215i"]
 [ext_resource type="PackedScene" uid="uid://blbbvdfbj2gug" path="res://player.tscn" id="1_ij1nr"]
+[ext_resource type="PackedScene" uid="uid://ca0ngyd35oo05" path="res://platforms/logWithSpikes_platform.tscn" id="2_ds8au"]
 [ext_resource type="PackedScene" uid="uid://dvsrqp7g3txk5" path="res://pause_menu.tscn" id="2_u63a2"]
 [ext_resource type="PackedScene" uid="uid://csgv122vqt3uu" path="res://enemies/enemigo.tscn" id="3_8eb3a"]
 [ext_resource type="PackedScene" uid="uid://c0y8na0vgvlwr" path="res://others/button.tscn" id="4_jh238"]
 [ext_resource type="PackedScene" uid="uid://ttqtnkkjwlde" path="res://others/door.tscn" id="5_f215i"]
 [ext_resource type="PackedScene" uid="uid://beivwyfmyfm8u" path="res://SmallEnemy.tscn" id="6_u63a2"]
 [ext_resource type="PackedScene" uid="uid://hwebu52mxpb4" path="res://enemies/fly_enemy.tscn" id="7_8eb3a"]
+[ext_resource type="PackedScene" uid="uid://c4j3s0olsroa1" path="res://platforms/log_platform.tscn" id="8_jh238"]
+[ext_resource type="PackedScene" uid="uid://kyanc7iuac2u" path="res://platforms/bouncing_mushroom.tscn" id="11_n3avn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -74,6 +78,12 @@ shape = SubResource("WorldBoundaryShape3D_f3sb7")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=975792724]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 mesh = SubResource("PlaneMesh_1s8gj")
+
+[node name="DamagingSpike" parent="StaticBody3D" unique_id=1777190126 instance=ExtResource("1_f215i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2365265, 2.2739108, 6.6545315)
+
+[node name="LogPlatform" parent="StaticBody3D" unique_id=1545203150 instance=ExtResource("2_ds8au")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.985474, 1.6782908, 7.0116224)
 
 [node name="CharacterBody3D" parent="." unique_id=100382861 instance=ExtResource("1_ij1nr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3947105, 4.1989326, 6.1049805)
@@ -209,4 +219,10 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 2, 1.0512514, -8)
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -2.2269044, 0.56125003, 3.936901)
 
 [node name="FlyEnemy" parent="." unique_id=1154287097 instance=ExtResource("7_8eb3a")]
-transform = Transform3D(-0.4996421, 0, 0.018914461, 0, 0.5, 0, -0.018914461, 0, -0.4996421, 3.930448, 2.9999952, 0.33628082)
+transform = Transform3D(-0.4996421, 0, 0.018914461, 0, 0.5, 0, -0.018914461, 0, -0.4996421, -5.7573876, 2.9999952, -4.31946)
+
+[node name="LogPlatform" parent="." unique_id=295725570 instance=ExtResource("8_jh238")]
+transform = Transform3D(0.9999609, 0.008595767, -0.002056772, -0.008593702, 0.99996257, 0.0010105923, 0.0020653852, -0.0009928702, 0.9999974, 1.939829, 1.1625922, 6.4402485)
+
+[node name="BouncingMushroom" parent="." unique_id=923029465 instance=ExtResource("11_n3avn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2790995, 2.2799037, 5.13665)

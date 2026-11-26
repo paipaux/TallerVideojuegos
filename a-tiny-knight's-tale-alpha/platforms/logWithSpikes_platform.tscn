@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://ca0ngyd35oo05"]
+
+[ext_resource type="Script" uid="uid://bswh2o32qq20u" path="res://platforms/log_platform.gd" id="1_ecuot"]
+[ext_resource type="PackedScene" uid="uid://d5r4f78rd0r7" path="res://assets/models/Log.glb" id="2_6x682"]
+[ext_resource type="PackedScene" uid="uid://dail46yt8ibpy" path="res://platforms/damaging_spike.tscn" id="3_1u42p"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g4v7s"]
+radius = 1.262207
+height = 6.9017944
+
+[node name="LogPlatform" type="AnimatableBody3D" unique_id=1545203150]
+script = ExtResource("1_ecuot")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1789514009]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.0038185692, -0.06785476)
+shape = SubResource("CapsuleShape3D_g4v7s")
+
+[node name="Log" parent="." unique_id=1714247994 instance=ExtResource("2_6x682")]
+
+[node name="DamagingSpike" parent="." unique_id=1777190126 instance=ExtResource("3_1u42p")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.010807514, 1.0301244, 1.9794087)
+
+[node name="DamagingSpike2" parent="." unique_id=1276167635 instance=ExtResource("3_1u42p")]
+transform = Transform3D(-3.4969112e-08, -0.8, 0, 0.8, -3.4969112e-08, 0, 0, 0, 0.8, -0.94182026, 0.029905558, 2.020739)
+
+[node name="DamagingSpike3" parent="." unique_id=694328234 instance=ExtResource("3_1u42p")]
+transform = Transform3D(-0.8, 6.9938224e-08, 0, -6.9938224e-08, -0.8, 0, 0, 0, 0.8, -0.04591036, -0.9699415, 1.9396229)
+
+[node name="DamagingSpike4" parent="." unique_id=81051217 instance=ExtResource("3_1u42p")]
+transform = Transform3D(8.3925876e-08, 0.64000005, 0, -0.64000005, 8.3925876e-08, 0, 0, 0, 0.64000005, 1.0138724, 0.04843235, 2.03959)
+
+[node name="DamagingSpike5" parent="." unique_id=613934051 instance=ExtResource("3_1u42p")]
+transform = Transform3D(-0.49497482, -0.49497464, 0, 0.49497464, -0.49497482, 0, 0, 0, 0.7, -0.74746543, -0.6883254, -0.016710043)
+
+[node name="DamagingSpike6" parent="." unique_id=65919399 instance=ExtResource("3_1u42p")]
+transform = Transform3D(-0.4949747, 0.49497476, 0, -0.49497476, -0.4949747, 0, 0, 0, 0.7, 0.70243794, -0.73002934, 0.016354322)
+
+[node name="DamagingSpike7" parent="." unique_id=1745461425 instance=ExtResource("3_1u42p")]
+transform = Transform3D(0.49497482, 0.49497464, 0, -0.49497464, 0.49497482, 0, 0, 0, 0.7, 0.73435986, 0.7350163, -0.048538923)
+
+[node name="DamagingSpike8" parent="." unique_id=938633462 instance=ExtResource("3_1u42p")]
+transform = Transform3D(0.49497464, -0.49497482, 0, 0.49497482, 0.49497464, 0, 0, 0, 0.7, -0.75745445, 0.67445654, 0.031434774)
+
+[node name="DamagingSpike9" parent="." unique_id=1088464532 instance=ExtResource("3_1u42p")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -0.010807514, 1.0301244, -2.0131054)
+
+[node name="DamagingSpike10" parent="." unique_id=561424625 instance=ExtResource("3_1u42p")]
+transform = Transform3D(-3.4969112e-08, -0.8, 0, 0.8, -3.4969112e-08, 0, 0, 0, 0.8, -0.94182026, 0.029905558, -1.971775)
+
+[node name="DamagingSpike11" parent="." unique_id=1261031870 instance=ExtResource("3_1u42p")]
+transform = Transform3D(-0.8, 6.9938224e-08, 0, -6.9938224e-08, -0.8, 0, 0, 0, 0.8, -0.04591036, -0.9699415, -2.0528913)
+
+[node name="DamagingSpike12" parent="." unique_id=1196509247 instance=ExtResource("3_1u42p")]
+transform = Transform3D(8.3925876e-08, 0.64000005, 0, -0.64000005, 8.3925876e-08, 0, 0, 0, 0.64000005, 1.0138724, 0.04843235, -1.9529243)

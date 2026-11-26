@@ -4,7 +4,7 @@ extends CharacterBody3D
 @onready var hurtbox_component: HurtboxComponent = $HurtboxComponent
 
 @export var speed: float = 1.5 # Velocidad de movimiento del enemigo
-@export var detection: float = 15.0# distancia en la que el enemigo empieza a perseguir
+@export var detection: float = 10.0# distancia en la que el enemigo empieza a perseguir
 @export var lose_range: float = 20.0 # distancia en la que el enemigo deja de perseguir
 @export var recoil: float = 3.0 # al pegarle retrocede levemente
 @export var over_player: float = 0.1 # altura sobre el jugador se pone

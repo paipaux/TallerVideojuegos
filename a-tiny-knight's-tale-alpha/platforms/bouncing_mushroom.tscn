@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://kyanc7iuac2u"]
+
+[ext_resource type="Script" uid="uid://b8k7kedc1hq6j" path="res://bouncing_mushroom.gd" id="1_o3bnj"]
+[ext_resource type="PackedScene" uid="uid://bvwdpb5en8xxu" path="res://assets/models/JumpMushroom.glb" id="2_l715a"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6x682"]
+radius = 0.9448242
+height = 1.8896484
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iho8c"]
+size = Vector3(1.3983307, 0.31860352, 1.3532333)
+
+[node name="BouncingMushroom" type="Node3D" unique_id=923029465]
+script = ExtResource("1_o3bnj")
+
+[node name="JumpMushroom" parent="." unique_id=1700822521 instance=ExtResource("2_l715a")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1922432811]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1692149750]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03225994, -0.21849608, -0.017185569)
+shape = SubResource("CapsuleShape3D_6x682")
+
+[node name="BounceArea" type="Area3D" parent="." unique_id=1961811599]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BounceArea" unique_id=951283896]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.027503967, 0.57955366, 0)
+shape = SubResource("BoxShape3D_iho8c")

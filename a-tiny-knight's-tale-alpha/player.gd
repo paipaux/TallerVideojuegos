@@ -77,6 +77,11 @@ var is_dead: bool = false
 @onready var health_bar: HeartsContainer = $PlayerInterface/HealthBar
 @onready var sword_hitbox: HitboxComponent = $sword/Sword_Hitbox
 
+#Variables para el knockback del personaje
+@export var knockback_duration: float = 0.25
+var is_knocked_back: bool = false
+var knockback_timer: float = 0.0
+
 #Estados de la maquina de estados (animacion) 
 enum State { IDLE, WALK, JUMP, FALL }
 var state: State = State.IDLE
@@ -94,6 +99,7 @@ func _ready():
 
 	health_bar.setup(health_component)
 	health_component.died.connect(_on_died)
+	hurtbox_component.hurt.connect(_on_hurt)
 
 func _on_died() -> void:
 	if is_dead:
@@ -119,6 +125,18 @@ func _on_died() -> void:
 
 	health_component.health = health_component.max_health
 	is_dead = false
+
+func _on_hurt(hitbox: HitboxComponent) -> void:
+	var direction = global_position - hitbox.global_position
+	direction.y = 0.0
+	direction = direction.normalized()
+
+	velocity.x = direction.x * hitbox.knockback_force
+	velocity.z = direction.z * hitbox.knockback_force
+	velocity.y = hitbox.knockback_vertical
+	
+	is_knocked_back = true
+	knockback_timer = knockback_duration
 
 func _input(event):
 	# el mouse no mueve la espada directo, solo le da impulso (se consume en update_sword_aim)
@@ -241,6 +259,17 @@ func _physics_process(delta: float) -> void:
 
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		
+	if is_knocked_back:
+		knockback_timer -= delta
+		move_and_slide()
+		update_animation_state()
+		update_sword_aim(delta)
+		tilt(delta)
+	
+		if knockback_timer <= 0.0:
+			is_knocked_back = false
+		return
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity

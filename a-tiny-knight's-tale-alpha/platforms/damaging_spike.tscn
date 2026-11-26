@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://dail46yt8ibpy"]
+
+[ext_resource type="PackedScene" uid="uid://cg85vwmsqamrj" path="res://assets/models/Spike.glb" id="1_ybyjb"]
+[ext_resource type="Script" uid="uid://byef6115jvt8u" path="res://components/hitbox_component.gd" id="2_np74i"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_72kt4"]
+radius = 0.38085938
+height = 1.211792
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yf5fn"]
+radius = 0.5107422
+height = 1.3596191
+
+[node name="DamagingSpike" type="StaticBody3D" unique_id=1777190126]
+
+[node name="Spike" parent="." unique_id=565706621 instance=ExtResource("1_ybyjb")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2097724446]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24503303, 0)
+shape = SubResource("CapsuleShape3D_72kt4")
+
+[node name="HitboxComponent" type="Area3D" parent="." unique_id=155722300]
+script = ExtResource("2_np74i")
+damage = 20.0
+knockback_force = 4.0
+knockback_vertical = 4.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitboxComponent" unique_id=62977769]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.31604004, 0)
+shape = SubResource("CapsuleShape3D_yf5fn")
