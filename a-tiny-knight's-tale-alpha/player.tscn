@@ -95,26 +95,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.019052744, 0, -0.16047612)
 [node name="TheHero" parent="Model" unique_id=1577262880 instance=ExtResource("2_sweqy")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.016688973, -0.041174024, 0.1867649)
 
-[node name="Skeleton3D" parent="Model/TheHero" index="0" unique_id=1504810280]
-bones/1/position = Vector3(0, 0.14750095, 0)
-bones/2/position = Vector3(-7.4248326e-14, 0.13491896, -0.22312674)
+[node name="Skeleton3D" parent="Model/TheHero" index="0" unique_id=2054641607]
+bones/1/position = Vector3(0, 0.113632545, 0)
+bones/2/position = Vector3(-9.998686e-14, 0.10105057, -0.22312674)
 bones/3/rotation = Quaternion(-0.707214, 8.42804e-08, -8.4307004e-08, 0.7069996)
-bones/6/rotation = Quaternion(-4.4766967e-08, 1.774989e-07, 0.024983272, 0.9996879)
-bones/7/rotation = Quaternion(1.6353988e-07, 6.5581174e-10, -0.10384272, 0.99459374)
+bones/6/rotation = Quaternion(-2.6702144e-08, 1.7833592e-07, 0.016448159, 0.9998648)
+bones/7/rotation = Quaternion(1.8151856e-07, 6.715555e-10, -0.10902265, 0.99403936)
 bones/8/rotation = Quaternion(4.0856187e-14, 5.960463e-07, -4.0259327e-14, 1)
-bones/10/rotation = Quaternion(-4.4766946e-08, -1.7749882e-07, -0.024983242, 0.9996879)
-bones/11/rotation = Quaternion(1.6353988e-07, -6.5574746e-10, 0.10384273, 0.99459374)
+bones/10/rotation = Quaternion(-2.6702134e-08, -1.7833582e-07, -0.016448144, 0.9998648)
+bones/11/rotation = Quaternion(1.8151853e-07, -6.7155015e-10, 0.10902266, 0.99403936)
 bones/12/rotation = Quaternion(4.0856187e-14, -5.960463e-07, 4.0259317e-14, 1)
 bones/13/rotation = Quaternion(0.6669287, 0.23463723, -0.23470823, 0.6671308)
-bones/14/rotation = Quaternion(-0.00092895667, -0.00032694268, 0.3318772, 0.9433221)
-bones/15/rotation = Quaternion(0.0016789277, 4.5079087e-09, -1.9570484e-08, 0.9999987)
-bones/16/rotation = Quaternion(-0.7077144, -8.9860634e-08, 1.4430717e-07, 0.7064988)
+bones/14/rotation = Quaternion(-0.08666743, -0.030491233, 0.33047375, 0.9393329)
+bones/15/rotation = Quaternion(0.15935455, 6.960226e-09, -2.4326452e-08, 0.9872215)
+bones/16/rotation = Quaternion(-0.7614365, -7.26534e-08, 1.6461514e-07, 0.6482396)
 bones/17/rotation = Quaternion(0.6669287, -0.23463723, 0.23470823, 0.6671308)
-bones/18/rotation = Quaternion(-0.00092895655, 0.00032694265, -0.3318772, 0.9433221)
-bones/19/rotation = Quaternion(0.001678898, -4.507911e-09, 1.9570484e-08, 0.9999987)
-bones/20/rotation = Quaternion(-0.7077144, 8.986062e-08, -1.4430717e-07, 0.7064988)
+bones/18/rotation = Quaternion(-0.08666743, 0.030491233, -0.33047375, 0.9393329)
+bones/19/rotation = Quaternion(0.15935455, -6.9602253e-09, 2.4326452e-08, 0.9872215)
+bones/20/rotation = Quaternion(-0.76143646, 7.2653386e-08, -1.6461516e-07, 0.6482397)
 
-[node name="Cube" parent="Model/TheHero/Skeleton3D" index="0" unique_id=1793601968]
+[node name="Cube" parent="Model/TheHero/Skeleton3D" index="0" unique_id=787135624]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.013046667, 0)
 
 [node name="TwoBoneIK3D" parent="Model/TheHero/Skeleton3D" index="1" unique_id=1193173010]
@@ -187,6 +187,7 @@ metadata/_custom_type_script = "uid://hkk3ntjtv5qt"
 collision_layer = 2
 script = ExtResource("7_dw050")
 health_component = NodePath("../HealthComponent")
+invulnerability_time = 0.8
 metadata/_custom_type_script = "uid://d2scaqlqkgoel"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtboxComponent" unique_id=1000873366]

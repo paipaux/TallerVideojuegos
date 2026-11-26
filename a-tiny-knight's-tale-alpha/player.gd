@@ -127,6 +127,9 @@ func _on_died() -> void:
 	is_dead = false
 
 func _on_hurt(hitbox: HitboxComponent) -> void:
+	if is_knocked_back:
+		return
+
 	var direction = global_position - hitbox.global_position
 	direction.y = 0.0
 	direction = direction.normalized()
@@ -134,7 +137,7 @@ func _on_hurt(hitbox: HitboxComponent) -> void:
 	velocity.x = direction.x * hitbox.knockback_force
 	velocity.z = direction.z * hitbox.knockback_force
 	velocity.y = hitbox.knockback_vertical
-	
+
 	is_knocked_back = true
 	knockback_timer = knockback_duration
 

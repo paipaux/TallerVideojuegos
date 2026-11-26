@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://hwebu52mxpb4" path="res://enemies/fly_enemy.tscn" id="7_8eb3a"]
 [ext_resource type="PackedScene" uid="uid://c4j3s0olsroa1" path="res://platforms/log_platform.tscn" id="8_jh238"]
 [ext_resource type="PackedScene" uid="uid://kyanc7iuac2u" path="res://platforms/bouncing_mushroom.tscn" id="11_n3avn"]
+[ext_resource type="PackedScene" uid="uid://ceprw5su8rq73" path="res://platforms/axe.tscn" id="12_cpyhp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3sb7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -76,7 +77,7 @@ shadow_enabled = true
 shape = SubResource("WorldBoundaryShape3D_f3sb7")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=975792724]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+transform = Transform3D(13, 0, 0, 0, 13, 0, 0, 0, 13, 0, 0, 0)
 mesh = SubResource("PlaneMesh_1s8gj")
 
 [node name="DamagingSpike" parent="StaticBody3D" unique_id=1777190126 instance=ExtResource("1_f215i")]
@@ -226,3 +227,6 @@ transform = Transform3D(0.9999609, 0.008595767, -0.002056772, -0.008593702, 0.99
 
 [node name="BouncingMushroom" parent="." unique_id=923029465 instance=ExtResource("11_n3avn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.2790995, 2.2799037, 5.13665)
+
+[node name="Axe" parent="." unique_id=628087474 instance=ExtResource("12_cpyhp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8201566, 0.6713321, 11.743321)

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://ceprw5su8rq73"]
+
+[ext_resource type="Script" uid="uid://baj4uht3up6qw" path="res://axe.gd" id="1_cp0o2"]
+[ext_resource type="PackedScene" uid="uid://yki7ljo8l34w" path="res://assets/models/Axe.glb" id="2_0iwo6"]
+[ext_resource type="Script" uid="uid://byef6115jvt8u" path="res://components/hitbox_component.gd" id="3_0iwo6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4v7s"]
+size = Vector3(2.2725677, 1.4713135, 0.33947754)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fcnqv"]
+size = Vector3(2.4702263, 1.6355352, 0.5338211)
+
+[node name="Axe" type="Node3D" unique_id=628087474]
+script = ExtResource("1_cp0o2")
+
+[node name="Pivot" type="AnimatableBody3D" parent="." unique_id=1318085206]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5282855, 0)
+sync_to_physics = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pivot" unique_id=1417171242]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006214857, -4.490791, -0.012827158)
+shape = SubResource("BoxShape3D_g4v7s")
+
+[node name="Axe" parent="Pivot" unique_id=1061636014 instance=ExtResource("2_0iwo6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.5282855, 0)
+
+[node name="HitBox" type="Area3D" parent="Pivot" unique_id=680109198]
+script = ExtResource("3_0iwo6")
+damage = 20.0
+knockback_force = 7.0
+knockback_vertical = 4.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pivot/HitBox" unique_id=1474279547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.012742996, -4.498384, -0.007106781)
+shape = SubResource("BoxShape3D_fcnqv")
