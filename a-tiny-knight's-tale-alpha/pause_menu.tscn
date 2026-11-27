@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://dvsrqp7g3txk5"]
 
 [ext_resource type="Script" uid="uid://dwktr6sc5bdjg" path="res://pause_menu.gd" id="1_hdmo1"]
+[ext_resource type="FontFile" uid="uid://b2jbox2la6tcr" path="res://fonts/Medieval Sharp/MedievalSharp-Book.ttf" id="2_05uyy"]
+[ext_resource type="FontFile" uid="uid://5ke1wioix0yi" path="res://fonts/Medieval Sharp/MedievalSharp-Bold.ttf" id="3_p81d2"]
+
+[sub_resource type="Theme" id="Theme_ul6ys"]
+default_font = ExtResource("2_05uyy")
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=1998557336]
 process_mode = 3
@@ -24,9 +29,13 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1253320022]
 layout_mode = 2
+size_flags_vertical = 4
+theme = SubResource("Theme_ul6ys")
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=281370452]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_p81d2")
+theme_override_font_sizes/font_size = 23
 text = "Juego pausado"
 horizontal_alignment = 1
 

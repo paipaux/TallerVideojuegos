@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://dqewe1iivdw2g"]
+
+[ext_resource type="FontFile" uid="uid://5ke1wioix0yi" path="res://fonts/Medieval Sharp/MedievalSharp-Bold.ttf" id="1_bj1uy"]
+[ext_resource type="FontFile" uid="uid://b2jbox2la6tcr" path="res://fonts/Medieval Sharp/MedievalSharp-Book.ttf" id="1_gmcsc"]
+[ext_resource type="Script" uid="uid://cev27yv0uv7tm" path="res://menu_principal.gd" id="1_ul6ys"]
+
+[sub_resource type="Theme" id="Theme_bj1uy"]
+default_font = ExtResource("1_gmcsc")
+
+[node name="MenuPrincipal" type="Control" unique_id=393493272]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ul6ys")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=177456573]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 170.0
+offset_top = 110.0
+offset_right = 1020.0
+offset_bottom = 535.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1172436084]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=2137518239]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_bj1uy")
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=329742583]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_bj1uy")
+theme_override_font_sizes/font_size = 46
+text = "A Tiny Knight's Tale"
+
+[node name="Iniciar" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1159480666]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Iniciar"
+
+[node name="Creditos" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=594238384]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Créditos"
+
+[node name="Salir" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=729548553]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Salir del juego"

@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://dlbsiqycbssd8"]
+
+[ext_resource type="Script" uid="uid://dq82tqvmwhx7b" path="res://credits.gd" id="1_nm7lk"]
+[ext_resource type="FontFile" uid="uid://dyri8te75y1em" path="res://fonts/Medieval Sharp/MedievalSharp-BoldOblique.ttf" id="2_c1t8d"]
+
+[node name="Credits" type="Control" unique_id=1302882612]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nm7lk")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=1410668902]
+layout_mode = 0
+offset_right = 850.0
+offset_bottom = 590.0
+bbcode_enabled = true
+text = "[wave]
+[center] --- music & sfx ---
+
+trabajando para usteeed
+
+--- fonts ---
+
+Medieval Sharp by Wojciech Kalinowski \"wmk69\" in fontlibrary
+
+--- textures ---
+
+Bark 015 from ambientcg
+Bricks 113 A from ambienttcg
+Evening Sky HDRI 039 B  from ambientcg
+Ground 037 from ambientcg
+Ground 110 from ambientcg
+Rock 030  from ambientcg
+
+--- shaders ---
+
+Cloud material by Mythical in Godot Shaders
+
+Cloud bed w/ depth & coloring by Amose05 in Godot Shaders
+
+[/center]"
+
+[node name="Baack" type="Button" parent="." unique_id=1721543054]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 917.0
+offset_top = 557.0
+offset_right = 1097.0
+offset_bottom = 602.0
+theme_override_fonts/font = ExtResource("2_c1t8d")
+theme_override_font_sizes/font_size = 20
+text = "Volver al menú"
